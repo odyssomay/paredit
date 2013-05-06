@@ -1,9 +1,4 @@
 [
-{
-	"keys": ["ctrl+j"],
-	"command": "paredit_test"
-}
-
 ////
 //// Basic insertion
 ,{
