@@ -95,7 +95,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 			"paredit_test_insertion"
 		]
 
-		write(view, edit, "Running tests\n\n")
+		write(view, edit, "Running tests\n")
 
 		for command in commands:
 			view.run_command(command)
