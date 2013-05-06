@@ -15,7 +15,7 @@ def paredit_forward_delete(view, edit):
 			enclosing_region = sublime.Region(region.begin(), region.begin())
 			(lb, rb) = shared.find_enclosing_brackets(view, enclosing_region, "(", ")")
 			if not (lb == None or rb == None):
-				expr_region = sublime.Region(lb, rb + 1)
+				expr_region = sublime.Region(lb, rb)
 				expression = view.substr(expr_region)
 				if is_expression_empty(expression):
 					view.erase(edit, expr_region)
