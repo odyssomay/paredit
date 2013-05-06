@@ -9,7 +9,7 @@ def find_enclosing_brackets(view, region, left_bracket, right_bracket):
 	left_parens = None
 	right_parens = None
 
-	i = region.a
+	i = region.a - 1
 	parens_count = 0
 	while i >= 0:
 		c = view.substr(i)
