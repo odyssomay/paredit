@@ -1,0 +1,60 @@
+[
+{
+	"keys": ["ctrl+j"],
+	"command": "paredit_test"
+}
+
+////
+//// Basic insertion
+,{
+	"keys": ["("],
+	"command": "paredit_open_round"
+ }
+,{
+	"keys": [")"],
+	"command": "paredit_close_round"
+ }
+
+,{
+	"keys": ["["],
+	"command": "paredit_open_square"
+ }
+,{
+	"keys": ["]"],
+	"command": "paredit_close_square"
+ }
+
+,{
+	"keys": ["{"],
+	"command": "paredit_open_curly"
+ }
+,{
+	"keys": ["}"],
+	"command": "paredit_close_curly"
+ }
+// ,
+// {
+// 	"keys": ["\""],
+// 	"command": "insert",
+// 	"args": {"characters": "\" \""}
+// }
+
+////
+//// Deleting & killing
+,{
+	"keys": ["delete"],
+	"command": "paredit_forward_delete"
+ }
+
+////
+//// Movement & navigation
+
+////
+//// Depth-changing commands
+
+////
+//// Bargafe & slurpage
+
+////
+//// Miscellaneous commands
+]
