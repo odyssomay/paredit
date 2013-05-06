@@ -27,6 +27,15 @@ def get_carets(view, offset):
 	region = view.sel()[0]
 	return [region.begin() - offset, region.end() - offset]
 
+def add_carets(text, carets):
+	out = text
+	(start, end) = carets
+	out = out[:start] + "|" + out[start:]
+	if not start == end:
+		end += 1
+		out = out[:end] + "|" + out[end:]
+	return out
+
 def run_test(view, edit, command, test):
 	(init_with_carets, result_with_carets) = test
 	(init, init_carets) = process_carets(init_with_carets)
@@ -38,12 +47,10 @@ def run_test(view, edit, command, test):
 	view.run_command(command)
 	actual_result = view.substr(sublime.Region(start_index, view.size()))
 	actual_carets = get_carets(view, start_index)
-	if not actual_result == result:
+	if not (actual_result == result and result_carets == actual_carets):
+		actual_result = add_carets(actual_result, actual_carets)
 		view.insert(edit, view.size(),
-			"\nFAILED! Expected: \"" + result + "\", got: \"" + actual_result + "\"")
-	if not result_carets == actual_carets:
-		view.insert(edit, view.size(),
-			"\nFAILED! Expected carets: " + str(result_carets) + ", got: " + str(actual_carets))
+			"\nFAILED! Input: \""  "Expected: \"" + result_with_carets + "\", got: \"" + actual_result + "\"")
 
 def run_tests(view, edit, command, tests):
 	write(view, edit, "Testing " + command)
