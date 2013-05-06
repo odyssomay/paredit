@@ -17,7 +17,7 @@ def paredit_forward_delete(view, edit):
 			if not (lb == None or rb == None):
 				expr_region = sublime.Region(lb, rb)
 				expression = view.substr(expr_region)
-				if is_expression_empty(expression):
+				if shared.is_expression_empty(expression):
 					view.erase(edit, expr_region)
 					return sublime.Region(lb, lb)
 				else:
