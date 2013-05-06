@@ -1,7 +1,7 @@
 [
 ////
 //// Basic insertion
-,{
+ {
 	"keys": ["("],
 	"command": "paredit_open_round"
  }
