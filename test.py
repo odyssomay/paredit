@@ -126,6 +126,21 @@ def paredit_test_deleting_killing(view, edit):
 		, ["(foo |bar)", "(|)"]
 		, ["(foo \"|bar baz\" quux)", "(foo \"|\" quux)"]
 		])
+
+def paredit_test_movement_navigation(view, edit):
+	run_tests(view, edit,
+		"paredit_forward",
+		[
+			["(foo |(bar baz) quux)", "(foo (bar baz)| quux)"]
+		, ["(foo (bar baz)|)", "(foo (bar baz))|"]
+		])
+	run_tests(view, edit,
+		"paredit_backward",
+		[
+			["(foo (bar baz)| quux)", "(foo |(bar baz) quux)"]
+		, ["(|(foo) bar)", "|((foo) bar)"]
+		])
+
 ####
 #### Commands
 class Paredit_test_insertionCommand(sublime_plugin.TextCommand):
@@ -135,6 +150,11 @@ class Paredit_test_insertionCommand(sublime_plugin.TextCommand):
 class Paredit_test_deleting_killingCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_test_deleting_killing(self.view, edit)
+
+class Paredit_test_movement_navigationCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_test_movement_navigation(self.view, edit)
+
 class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		window = sublime.active_window()
@@ -143,6 +163,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 		commands = [
 			"paredit_test_insertion"
 		, "paredit_test_deleting_killing"
+		, "paredit_test_movement_navigation"
 		]
 
 		write(view, edit, "Running tests\n")
