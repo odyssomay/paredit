@@ -50,7 +50,9 @@ def run_test(view, edit, command, test):
 	if not (actual_result == result and result_carets == actual_carets):
 		actual_result = add_carets(actual_result, actual_carets)
 		view.insert(edit, view.size(),
-			"\nFAILED! Input: \""  "Expected: \"" + result_with_carets + "\", got: \"" + actual_result + "\"")
+			"\nFAILED! Input: \"" + init_with_carets +
+			"\", Expected: \"" + result_with_carets +
+			"\", Result: \"" + actual_result + "\"")
 
 def run_tests(view, edit, command, tests):
 	write(view, edit, "Testing " + command)
