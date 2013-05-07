@@ -71,6 +71,7 @@ def paredit_test_insertion(view, edit):
 		,	["|hel|lo", "|(hel)|lo"]
 		, ["|[1 2| 3]", "|[1 2| 3]"]
 		, ["{:a 3 :|b 4}|", "{:a 3 :|b 4}|"]
+		, ["(def s \"hel|lo\")", "(def s \"hel(|lo\")"]
 		])
 	run_tests(view, edit,
 		"paredit_close_round",
