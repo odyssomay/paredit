@@ -55,6 +55,7 @@ def run_test(view, edit, command, test):
 			"\", Result: \"" + actual_result + "\"")
 
 def run_tests(view, edit, command, tests):
+	write(view, edit, "========================================")
 	write(view, edit, "Testing " + command)
 	for test in tests:
 		run_test(view, edit, command, test)
