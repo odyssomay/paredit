@@ -91,6 +91,12 @@ def paredit_test_insertion(view, edit):
 		, ["(def |a 3)|", "(def |a 3)|"]
 		, ["{:a 3 :|b 4}|", "{:a 3 :|b 4}|"]
 		])
+	run_tests(view, edit,
+		"paredit_newline",
+		[
+			["|", "|\n"]
+		, ["(defn add1 [x]| (+ x 1))", "(defn add1 [x]\n  |(+ x 1))"]
+		])
 
 ####
 #### Commands
