@@ -98,12 +98,43 @@ def paredit_test_insertion(view, edit):
 		, ["(defn add1 [x]| (+ x 1))", "(defn add1 [x]\n  |(+ x 1))"]
 		])
 
+def paredit_test_deleting_killing(view, edit):
+	run_tests(view, edit,
+		"paredit_forward_delete",
+		[
+			["(quu|x \"zot\")", "(quu| \"zot\")"]
+		, ["(quux |\"zot\")", "(quux \"|zot\")"]
+		, ["(quux \"|zot\")", "(quux \"|ot\")"]
+		, ["(foo (|) bar)", "(foo | bar)"]
+		, ["|(foo bar)", "(|foo bar)"]
+		, ["(hello|)", "(hello)|"]
+		])
+	run_tests(view, edit,
+		"paredit_backward_delete",
+		[
+			["(\"zot\" q|uux)", "(\"zot\" |uux)"]
+		, ["(\"zot\"| quux)", "(\"zot|\" quux)"]
+		, ["(\"zot|\" quux)", "(\"zo|\" quux)"]
+		, ["(foo (|) bar)", "(foo | bar)"]
+		, ["(foo bar)|", "(foo bar|)"]
+		, ["(|foo bar)", "|(foo bar)"]
+		])
+	run_tests(view, edit,
+		"paredit_kill",
+		[
+			["(|foo bar)", "(|)"]
+		, ["(foo |bar)", "(|)"]
+		, ["(foo \"|bar baz\" quux)", "(foo \"|\" quux)"]
+		])
 ####
 #### Commands
 class Paredit_test_insertionCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_test_insertion(self.view, edit)
 
+class Paredit_test_deleting_killingCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_test_deleting_killing(self.view, edit)
 class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		window = sublime.active_window()
@@ -111,6 +142,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 
 		commands = [
 			"paredit_test_insertion"
+		, "paredit_test_deleting_killing"
 		]
 
 		write(view, edit, "Running tests\n")
