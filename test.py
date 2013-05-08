@@ -155,6 +155,7 @@ def paredit_test_movement_navigation(view, edit):
 		[
 			["(foo |(bar baz) quux)", "(foo (bar baz)| quux)"]
 		,	["(foo (bar baz)|)", "(foo (bar baz))|"]
+		,	["(fo|o bar)", "(foo  bar|)"]
 		])
 	run_tests(view, edit,
 		"paredit_backward",
