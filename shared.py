@@ -42,7 +42,13 @@ def find_enclosing_brackets(view, region, left_bracket, right_bracket):
 	return (left_parens, right_parens)
 
 def get_expression(view, point):
-	return find_enclosing_brackets(view, sublime.Region(point, point), "(", ")")
+	paren = (lparen, rparen) = find_enclosing_brackets(view, sublime.Region(point, point), "(", ")")
+	brack = (lbrack, rbrack) = find_enclosing_brackets(view, sublime.Region(point, point), "[", "]")
+	curly = (lcurly, rcurly) = find_enclosing_brackets(view, sublime.Region(point, point), "{", "}")
+
+	if lbrack > lparen: return brack
+	elif lcurly > lparen or lcurly > lbrack: return curly
+	else: return paren
 
 def edit_selections(view, f):
 	new_regions = []
