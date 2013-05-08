@@ -10,3 +10,8 @@ The plugin is under development, but intended to be finished before 2013-05-25.
 To try the current implementation, clone the repository and place the resulting
 directory in `Installed Packages` inside your
 [data directory](http://docs.sublimetext.info/en/latest/basic_concepts.html#the-data-directory).
+
+## Testing
+
+Press *ctrl+shift+p* to open the command palette. Type *test*
+and run *Paredit: Run Tests*.
