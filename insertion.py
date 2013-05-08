@@ -31,7 +31,7 @@ def paredit_close(view, edit, left_bracket, right_bracket):
 		else:
 			return region
 
-	edit_selections(view, f)
+	shared.edit_selections(view, f)
 
 def paredit_open_round(view, edit):
 	paredit_open(view, edit, "(", ")")
