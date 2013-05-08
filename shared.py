@@ -41,8 +41,8 @@ def find_enclosing_brackets(view, region, left_bracket, right_bracket):
 
 	return (left_parens, right_parens)
 
-def get_context():
-	pass
+def get_expression(view, point):
+	return find_enclosing_brackets(view, sublime.Region(point, point), "(", ")")
 
 def edit_selections(view, f):
 	new_regions = []
