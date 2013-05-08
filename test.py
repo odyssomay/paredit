@@ -69,8 +69,6 @@ def paredit_test_insertion(view, edit):
 			["|", "(|)"]
 		,	["(|)", "((|))"]
 		,	["|hel|lo", "|(hel)|lo"]
-		,	["|[1 2| 3]", "|[1 2| 3]"]
-		,	["{:a 3 :|b 4}|", "{:a 3 :|b 4}|"]
 		,	["(def s \"hel|lo\")", "(def s \"hel(|lo\")"]
 		])
 	run_tests(view, edit,
@@ -88,8 +86,6 @@ def paredit_test_insertion(view, edit):
 			["|", "[|]"]
 		,	["[|]", "[[|]]"]
 		,	["hell|o w|orld", "hell|[o w]|orld"]
-		,	["(def |a 3)|", "(def |a 3)|"]
-		,	["{:a 3 :|b 4}|", "{:a 3 :|b 4}|"]
 		])
 	run_tests(view, edit,
 		"paredit_newline",
@@ -106,7 +102,10 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(quux |\"zot\")", "(quux \"|zot\")"]
 		,	["(quux \"|zot\")", "(quux \"|ot\")"]
 		,	["(foo (|) bar)", "(foo | bar)"]
+		,	["(foo [|] bar)", "(foo | bar)"]
 		,	["|(foo bar)", "(|foo bar)"]
+		,	["|[hello world]", "[|hello world]"]
+		,	["|{:a 3 :b 4}", "{|:a 3 :b 4}"]
 		,	["(hello|)", "(hello)|"]
 		])
 	run_tests(view, edit,
@@ -115,16 +114,37 @@ def paredit_test_deleting_killing(view, edit):
 			["(\"zot\" q|uux)", "(\"zot\" |uux)"]
 		,	["(\"zot\"| quux)", "(\"zot|\" quux)"]
 		,	["(\"zot|\" quux)", "(\"zo|\" quux)"]
+
 		,	["(foo (|) bar)", "(foo | bar)"]
+		,	["(foo [|] bar)", "(foo | bar)"]
+		,	["(foo {|} bar)", "(foo | bar)"]
+
 		,	["(foo bar)|", "(foo bar|)"]
+		,	["[foo bar]|", "[foo bar|]"]
+		,	["{:a 3 :b 4}|", "{:a 3 :b 4|}"]
+
 		,	["(|foo bar)", "|(foo bar)"]
+		,	["[|foo bar]", "|[foo bar]"]
+		,	["{|:a 3 :b 4}", "{|:a 3 :b 4}"]
 		])
 	run_tests(view, edit,
 		"paredit_kill",
 		[
 			["(|foo bar)", "(|)"]
-		,	["(foo |bar)", "(|)"]
+		,	["(foo |bar)", "(foo |)"]
 		,	["(foo \"|bar baz\" quux)", "(foo \"|\" quux)"]
+		,	["(foo \"bar |baz\" quux)", "(foo \"bar |\" quux)"]
+		,	["[1 2| 3]", "[1 2|]"]
+		,	["{:a |3 :b 4}", "{:a |}"]
+		])
+	run_tests(view, edit,
+		"paredit_kill_expression"
+		[
+			["(foo| bar)", "(|)"]
+		,	["(foo \"|bar baz\" quux)", "(foo \"|\" quux)"]
+		,	["(foo \"bar |baz\" quux)", "(foo \"|\" quux)"]
+		,	["[1 2| 3]", "[|]"]
+		,	["{:a |3 :b 4}", "{|}"]
 		])
 
 def paredit_test_movement_navigation(view, edit):
