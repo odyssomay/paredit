@@ -101,6 +101,7 @@ def paredit_test_deleting_killing(view, edit):
 			["(quu|x \"zot\")", "(quu| \"zot\")"]
 		,	["(quux |\"zot\")", "(quux \"|zot\")"]
 		,	["(quux \"|zot\")", "(quux \"|ot\")"]
+		,	["(quux \"|\")", "(quux |)"]
 		,	["(foo (|) bar)", "(foo | bar)"]
 		,	["(foo [|] bar)", "(foo | bar)"]
 		,	["|(foo bar)", "(|foo bar)"]
