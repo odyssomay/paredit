@@ -21,13 +21,30 @@ def paredit_open(view, edit, left_bracket, right_bracket):
 
 	shared.edit_selections(view, f)
 
+def paredit_close_remove_spaces(view, edit, rb):
+	i = rb - 2
+
+	while i >= 0:
+		c = view.substr(i)
+		if not c == " ":
+			break
+		i -= 1
+
+	spaces_start = i + 1
+	spaces_end = rb - 1
+
+	if not spaces_start == spaces_end:
+		view.erase(edit, sublime.Region(i + 1, rb - 1))
+
+	return i + 2
+
 def paredit_close(view, edit, left_bracket, right_bracket):
 	def f(region):
 		(lb, rb) = shared.find_enclosing_brackets(
 			view, region, left_bracket, right_bracket)
 
 		if rb:
-			return rb
+			return paredit_close_remove_spaces(view, edit, rb)
 		else:
 			return region
 
