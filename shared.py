@@ -77,8 +77,5 @@ def remove_spaces(view, edit, point):
 
 	right_limit = i
 
-	print(left_limit, right_limit)
-	print(repr(view.substr(sublime.Region(left_limit, right_limit))))
-
 	view.erase(edit, sublime.Region(left_limit, right_limit))
 	return left_limit
