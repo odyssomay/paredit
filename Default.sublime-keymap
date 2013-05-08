@@ -44,6 +44,14 @@
 	"keys": ["backspace"],
 	"command": "paredit_backward_delete"
  }
+,{
+	"keys": ["ctrl+k"],
+	"command": "paredit_kill"
+ }
+,{
+	"keys": ["ctrl+shift+k"],
+	"command": "paredit_kill_expression"
+ }
 
 ////
 //// Movement & navigation
