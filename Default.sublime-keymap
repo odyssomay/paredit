@@ -40,6 +40,10 @@
 	"keys": ["delete"],
 	"command": "paredit_forward_delete"
  }
+,{
+	"keys": ["backspace"],
+	"command": "paredit_backward_delete"
+ }
 
 ////
 //// Movement & navigation
