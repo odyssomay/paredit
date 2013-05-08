@@ -90,8 +90,8 @@ def paredit_test_insertion(view, edit):
 	run_tests(view, edit,
 		"paredit_newline",
 		[
-			["|", "|\n"]
-		,	["(defn add1 [x]| (+ x 1))", "(defn add1 [x]\n  |(+ x 1))"]
+			["|", "\n|"]
+		,	["(defn add1 [x] | (+ x 1))", "(defn add1 [x]\n  |(+ x 1))"]
 		])
 
 def paredit_test_deleting_killing(view, edit):
