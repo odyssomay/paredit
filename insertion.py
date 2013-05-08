@@ -68,6 +68,18 @@ def paredit_open_curly(view, edit):
 def paredit_close_curly(view, edit):
 	paredit_close(view, edit, "{", "}")
 
+def paredit_newline(view, edit):
+	def f(region):
+		s = region.begin()
+		e = region.end()
+
+		if not s == e: view.erase(region)
+		point = shared.remove_spaces(view, edit, s)
+		view.insert(edit, point, "\n")
+		return point + 1
+
+	shared.edit_selections(view, f)
+
 ####
 #### Commands
 class Paredit_open_roundCommand(sublime_plugin.TextCommand):
@@ -93,3 +105,7 @@ class Paredit_open_curlyCommand(sublime_plugin.TextCommand):
 class Paredit_close_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_close_curly(self.view, edit)
+
+class Paredit_newlineCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_newline(self.view, edit)
