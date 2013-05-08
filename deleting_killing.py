@@ -7,19 +7,19 @@ except:
 
 def paredit_forward_delete(view, edit):
 	def f(region):
-		skip = False
+		if not region.begin() == region.end():
+			return shared.erase_region(view, edit, region)
+
 		next_char = view.substr(region.begin())
-		if next_char == "\"" or next_char == "(":
+		if next_char == "\"" or next_char == "(" or next_char == "[" or next_char == "{":
 			return region.begin() + 1
-		elif next_char == ")":
-			enclosing_region = sublime.Region(region.begin(), region.begin())
-			(lb, rb) = shared.find_enclosing_brackets(view, enclosing_region, "(", ")")
+		elif next_char == ")" or next_char == "]" or next_char == "}":
+			(lb, rb) = shared.get_expression(view, region.begin())
 			if not (lb == None or rb == None):
 				expr_region = sublime.Region(lb, rb)
 				expression = view.substr(expr_region)
 				if shared.is_expression_empty(expression):
-					view.erase(edit, expr_region)
-					return sublime.Region(lb, lb)
+					return shared.erase_region(view, edit, expr_region)
 				else:
 					return sublime.Region(region.begin() + 1, region.begin() + 1)
 			else:
@@ -31,7 +31,29 @@ def paredit_forward_delete(view, edit):
 	shared.edit_selections(view, f)
 
 def paredit_backward_delete(view, edit):
-	pass
+	def f(region):
+		if not region.begin() == region.end():
+			return shared.erase_region(view, edit, region)
+
+		next_char = view.substr(region.begin() - 1)
+		if next_char == "\"" or next_char == ")" or next_char == "]" or next_char == "}":
+			return region.begin() - 1
+		elif next_char == "(" or next_char == "[" or next_char == "{":
+			(lb, rb) = shared.get_expression(view, region.begin())
+			if not (lb == None or rb == None):
+				expr_region = sublime.Region(lb, rb)
+				expression = view.substr(expr_region)
+				if shared.is_expression_empty(expression):
+					return shared.erase_region(view, edit, expr_region)
+				else:
+					return sublime.Region(region.begin() - 1, region.begin() - 1)
+			else:
+				return region
+		else:
+			view.erase(edit, sublime.Region(region.begin(), region.begin() - 1))
+			return region.begin() - 1
+
+	shared.edit_selections(view, f)
 
 def paredit_kill_abstract(view, edit, expression):
 	def f(region):
