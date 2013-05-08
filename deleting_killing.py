@@ -33,24 +33,30 @@ def paredit_forward_delete(view, edit):
 def paredit_backward_delete(view, edit):
 	pass
 
-def paredit_kill(view, edit):
-	def f(region):
-		pass
-
-def paredit_kill_expression(view, edit):
+def paredit_kill_abstract(view, edit, expression):
 	def f(region):
 		point = region.begin()
 		if region.end() == point:
 			(lb, rb) = shared.get_expression(view, point)
 			if lb and rb:
-				view.erase(edit, sublime.Region(lb + 1, rb - 1))
-				return lb + 1
+				if expression:
+					view.erase(edit, sublime.Region(lb + 1, rb - 1))
+					return lb + 1
+				else:
+					view.erase(edit, sublime.Region(point, rb - 1))
+					return point
 			else:
 				return point
 		else:
 			return region
 
 	shared.edit_selections(view, f)
+
+def paredit_kill(view, edit):
+	paredit_kill_abstract(view, edit, False)
+
+def paredit_kill_expression(view, edit):
+	paredit_kill_abstract(view, edit, True)
 
 ####
 #### Commands
