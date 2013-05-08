@@ -79,6 +79,7 @@ def paredit_newline(view, edit):
 		return point + 1
 
 	shared.edit_selections(view, f)
+	view.run_command("lispindent")
 
 ####
 #### Commands
