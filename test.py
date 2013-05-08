@@ -138,7 +138,7 @@ def paredit_test_deleting_killing(view, edit):
 		,	["{:a |3 :b 4}", "{:a |}"]
 		])
 	run_tests(view, edit,
-		"paredit_kill_expression"
+		"paredit_kill_expression",
 		[
 			["(foo| bar)", "(|)"]
 		,	["(foo \"|bar baz\" quux)", "(foo \"|\" quux)"]
