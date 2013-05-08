@@ -1,4 +1,5 @@
 
+import sublime
 import re
 
 whitespace_matcher = re.compile("\s*$")
@@ -55,3 +56,29 @@ def edit_selections(view, f):
 	for region in new_regions:
 		if not region == None:
 			view.sel().add(region)
+
+def remove_spaces(view, edit, point):
+	i = point - 1
+
+	while i >= 0:
+		c = view.substr(i)
+		if not c == " ":
+			break
+		i -= 1
+
+	left_limit = i + 1
+	i = point
+
+	while i < view.size():
+		c = view.substr(i)
+		if not c == " ":
+			break
+		i += 1
+
+	right_limit = i
+
+	print(left_limit, right_limit)
+	print(repr(view.substr(sublime.Region(left_limit, right_limit))))
+
+	view.erase(edit, sublime.Region(left_limit, right_limit))
+	return left_limit
