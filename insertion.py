@@ -12,7 +12,9 @@ def paredit_open(view, edit, left_bracket, right_bracket):
 
 		view.insert(edit, begin, left_bracket)
 
-		if not (begin == end and shared.is_inside_string(view, begin)):
+		if not (begin == end and
+		        (shared.is_inside_string(view, begin) or
+		         shared.is_inside_comment(view, begin))):
 			view.insert(edit, end + 1, right_bracket)
 
 		return begin + 1
