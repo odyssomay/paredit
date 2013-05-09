@@ -190,6 +190,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 		,	"paredit_test_movement_navigation"
 		]
 
+		view.run_command("set_file_type", {"syntax": "Packages/Clojure/Clojure.tmLanguage"})
 		write(view, edit, "Running tests\n")
 
 		for command in commands:
