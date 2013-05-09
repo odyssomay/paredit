@@ -5,6 +5,38 @@ for [sublime text](http://www.sublimetext.com/).
 
 The plugin is under development, but intended to be finished before 2013-05-25.
 
+## Implementation Status
+
+Below is a list of all currently fully implemented paredit commands.
+
+Note: The actual name of the commands inside sublime text use 
+underscores instead of hyphens. E.g. *paredit-open-round* is
+called *paredit_open_round*.
+
+### Basic Insertion Commands
+
+* paredit-open-round
+* paredit-close-round
+* paredit-open-square
+* paredit-close-square
+* paredit-doublequote
+* paredit-newline
+
+### Deleting & killing
+
+* paredit-forward-delete
+* paredit-backward-delete
+* paredit-kill
+
+### Extra commands
+
+These are not part of emacs paredit.
+
+* paredit-open-curly, same as paredit-open-round but with *{*.
+* paredit-close-curly, same as paredit-close-round but with *}*.
+* paredit-kill-expression, same as paredit-kill, but removes the
+whole expression.
+
 ## Installation
 
 To try the current implementation, clone the repository and place the resulting
