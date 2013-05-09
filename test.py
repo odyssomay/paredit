@@ -118,6 +118,8 @@ def paredit_test_deleting_killing(view, edit):
 		,	["|[hello world]", "[|hello world]"]
 		,	["|{:a 3 :b 4}", "{|:a 3 :b 4}"]
 		,	["(hello|)", "(hello)|"]
+
+		,	["; |(", "; |"]
 		])
 	run_tests(view, edit,
 		"paredit_backward_delete",
@@ -138,6 +140,8 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(|foo bar)", "|(foo bar)"]
 		,	["[|foo bar]", "|[foo bar]"]
 		,	["{|:a 3 :b 4}", "|{:a 3 :b 4}"]
+
+		,	["; (|", "; |"]
 		])
 	run_tests(view, edit,
 		"paredit_kill",
