@@ -12,7 +12,7 @@ def is_inside_string(view, point):
 
 	for region in regions:
 		if region.contains(test_region):
-			return True
+			return region
 
 	return False
 
