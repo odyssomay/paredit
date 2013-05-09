@@ -6,6 +6,9 @@ def erase_region(view, edit, region):
 	view.erase(edit, region)
 	return region.begin()
 
+def is_inside_string(view, point):
+	return False
+
 whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
 	return whitespace_matcher.match(string[1:-1])
