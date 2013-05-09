@@ -45,7 +45,8 @@ def paredit_close(view, edit, left_bracket, right_bracket):
 
 		point = region.begin()
 
-		if shared.is_inside_string(view, point):
+		if (shared.is_inside_string(view, point) or
+		    shared.is_inside_comment(view, point)):
 			view.insert(edit, point, right_bracket)
 			return point + 1
 
