@@ -22,43 +22,47 @@ def remove_empty_expression(view, edit, point, fail_direction):
 	else:
 		return point
 
-def paredit_forward_delete(view, edit):
+def paredit_delete(view, edit, is_forward):
 	def f(region):
 		if not region.begin() == region.end():
 			return shared.erase_region(view, edit, region)
 
 		point = region.begin()
-		next_char = view.substr(region.begin())
+
+		if is_forward:
+			direction = 1
+			next_char = view.substr(point)
+			skip_char_type = "lbracket"
+		else:
+			direction = -1
+			next_char = view.substr(point - 1)
+			skip_char_type = "rbracket"
+
 		next_char_type = char_type(next_char)
 
-		if   next_char_type == "string":   return region.begin() + 1
-		elif next_char_type == "lbracket": return region.begin() + 1
-		elif next_char_type == "rbracket":
-			return remove_empty_expression(view, edit, point, 1)
+		if next_char_type == "string":
+			if shared.is_inside_string(view, point):
+				return remove_empty_expression(view, edit, point, direction)
+			else:
+				return region.begin() + direction
+		elif next_char_type == skip_char_type: return region.begin() + direction
+		elif next_char_type:
+			return remove_empty_expression(view, edit, point, direction)
 		else:
-			view.erase(edit, sublime.Region(point, point + 1))
-			return region
+			if is_forward:
+				view.erase(edit, sublime.Region(point, point + direction))
+				return region
+			else:
+				view.erase(edit, sublime.Region(point - 1, point))
+				return point - 1
 
 	shared.edit_selections(view, f)
+
+def paredit_forward_delete(view, edit):
+	paredit_delete(view, edit, True)
 
 def paredit_backward_delete(view, edit):
-	def f(region):
-		if not region.begin() == region.end():
-			return shared.erase_region(view, edit, region)
-
-		point = region.begin()
-		next_char = view.substr(point - 1)
-		next_char_type = char_type(next_char)
-
-		if   next_char_type == "string":   return region.begin() - 1
-		elif next_char_type == "rbracket": return region.begin() - 1
-		elif next_char_type == "lbracket":
-			return remove_empty_expression(view, edit, point, -1)
-		else:
-			view.erase(edit, sublime.Region(point - 1, point))
-			return point - 1
-
-	shared.edit_selections(view, f)
+	paredit_delete(view, edit, False)
 
 def paredit_kill_abstract(view, edit, expression):
 	def f(region):
