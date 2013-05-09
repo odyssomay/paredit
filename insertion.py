@@ -41,6 +41,12 @@ def paredit_close(view, edit, left_bracket, right_bracket):
 		if not region.a == region.b:
 			return region
 
+		point = region.begin()
+
+		if shared.is_inside_string(view, point):
+			view.insert(edit, point, right_bracket)
+			return point + 1
+
 		(lb, rb) = shared.find_enclosing_brackets(
 			view, region.begin(), left_bracket, right_bracket)
 
