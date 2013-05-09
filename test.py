@@ -68,7 +68,7 @@ def paredit_test_insertion(view, edit):
 		[
 			["|", "(|)"]
 		,	["(|)", "((|))"]
-		,	["|hel|lo", "|(hel)|lo"]
+		,	["|hel|lo", "(|hel)lo"]
 		,	["(def s \"hel|lo\")", "(def s \"hel(|lo\")"]
 		])
 	run_tests(view, edit,
@@ -86,7 +86,7 @@ def paredit_test_insertion(view, edit):
 		[
 			["|", "[|]"]
 		,	["[|]", "[[|]]"]
-		,	["hell|o w|orld", "hell|[o w]|orld"]
+		,	["hell|o w|orld", "hell[|o w]orld"]
 		])
 	run_tests(view, edit,
 		"paredit_newline",
