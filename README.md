@@ -32,9 +32,9 @@ called *paredit_open_round*.
 
 These are not part of emacs paredit.
 
-* paredit-open-curly, same as paredit-open-round but with *{*.
-* paredit-close-curly, same as paredit-close-round but with *}*.
-* paredit-kill-expression, same as paredit-kill, but removes the
+* paredit-open-curly, same as *paredit-open-round* but with *{*.
+* paredit-close-curly, same as *paredit-close-round* but with *}*.
+* paredit-kill-expression, same as *paredit-kill*, but removes the
 whole expression.
 
 ## Installation
