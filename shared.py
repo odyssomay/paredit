@@ -13,11 +13,11 @@ whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
 	return whitespace_matcher.match(string[1:-1])
 
-def find_enclosing_brackets(view, region, left_bracket, right_bracket):
+def find_enclosing_brackets(view, point, left_bracket, right_bracket):
 	left_parens = None
 	right_parens = None
 
-	i = region.a - 1
+	i = point - 1
 	parens_count = 0
 	while i >= 0:
 		c = view.substr(i)
@@ -31,7 +31,7 @@ def find_enclosing_brackets(view, region, left_bracket, right_bracket):
 			break
 		i -= 1
 
-	i = region.b
+	i = point
 	parens_count = 0
 	end = view.size()
 	while i < end:
@@ -49,9 +49,9 @@ def find_enclosing_brackets(view, region, left_bracket, right_bracket):
 	return (left_parens, right_parens)
 
 def get_expression(view, point):
-	paren = (lparen, rparen) = find_enclosing_brackets(view, sublime.Region(point, point), "(", ")")
-	brack = (lbrack, rbrack) = find_enclosing_brackets(view, sublime.Region(point, point), "[", "]")
-	curly = (lcurly, rcurly) = find_enclosing_brackets(view, sublime.Region(point, point), "{", "}")
+	paren = (lparen, rparen) = find_enclosing_brackets(view, point, "(", ")")
+	brack = (lbrack, rbrack) = find_enclosing_brackets(view, point, "[", "]")
+	curly = (lcurly, rcurly) = find_enclosing_brackets(view, point, "{", "}")
 
 	if lbrack > lparen: return brack
 	elif lcurly > lparen or lcurly > lbrack: return curly

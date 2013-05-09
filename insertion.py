@@ -14,7 +14,7 @@ def paredit_open(view, edit, left_bracket, right_bracket):
 
 		if not (begin == end and shared.is_inside_string(view, begin)):
 			view.insert(edit, end + 1, right_bracket)
-		
+
 		return begin + 1
 
 	shared.edit_selections(view, f)
@@ -38,8 +38,11 @@ def paredit_close_remove_spaces(view, edit, rb):
 
 def paredit_close(view, edit, left_bracket, right_bracket):
 	def f(region):
+		if not region.a == region.b:
+			return region
+
 		(lb, rb) = shared.find_enclosing_brackets(
-			view, region, left_bracket, right_bracket)
+			view, region.begin(), left_bracket, right_bracket)
 
 		if rb:
 			return paredit_close_remove_spaces(view, edit, rb)
