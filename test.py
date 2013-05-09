@@ -89,6 +89,12 @@ def paredit_test_insertion(view, edit):
 		,	["hell|o w|orld", "hell[|o w]orld"]
 		])
 	run_tests(view, edit,
+		"paredit_doublequote",
+		[
+			["|", "\"\"|"]
+		,	["\"|\"", "\"\\\"|\""]
+		])
+	run_tests(view, edit,
 		"paredit_newline",
 		[
 			["|", "\n|"]
