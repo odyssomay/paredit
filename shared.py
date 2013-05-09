@@ -56,6 +56,9 @@ def find_enclosing_brackets(view, point, left_bracket, right_bracket):
 	return (left_parens, right_parens)
 
 def get_expression(view, point):
+	string_region = is_inside_string(view, point)
+	if string_region: return (string_region.begin(), string_region.end())
+
 	paren = (lparen, rparen) = find_enclosing_brackets(view, point, "(", ")")
 	brack = (lbrack, rbrack) = find_enclosing_brackets(view, point, "[", "]")
 	curly = (lcurly, rcurly) = find_enclosing_brackets(view, point, "{", "}")
