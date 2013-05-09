@@ -93,8 +93,9 @@ def paredit_test_insertion(view, edit):
 	run_tests(view, edit,
 		"paredit_doublequote",
 		[
-			["|", "\"\"|"]
+			["|", "\"|\""]
 		,	["\"|\"", "\"\\\"|\""]
+		,	["|hello world|", "\"|hello world|\""]
 		])
 	run_tests(view, edit,
 		"paredit_newline",
