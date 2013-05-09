@@ -27,6 +27,10 @@
 	"keys": ["}"],
 	"command": "paredit_close_curly"
  }
+,{
+	"keys": ["\""],
+	"command": "paredit_doublequote"
+ }
 // ,
 // {
 // 	"keys": ["\""],
