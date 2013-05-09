@@ -9,15 +9,13 @@ def paredit_open(view, edit, left_bracket, right_bracket):
 	def f(region):
 		begin = region.begin()
 		end = region.end()
+
 		view.insert(edit, begin, left_bracket)
-		view.insert(edit, end + 1, right_bracket)
-		if begin == end:
-			new_begin = begin + 1
-			new_end = new_begin
-		else:
-			new_begin = begin
-			new_end = end + 2
-		return sublime.Region(new_begin, new_end)
+
+		if not (begin == end and shared.is_inside_string(view, begin)):
+			view.insert(edit, end + 1, right_bracket)
+		
+		return begin + 1
 
 	shared.edit_selections(view, f)
 
