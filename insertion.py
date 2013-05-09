@@ -75,6 +75,25 @@ def paredit_open_curly(view, edit):
 def paredit_close_curly(view, edit):
 	paredit_close(view, edit, "{", "}")
 
+def paredit_doublequote(view, edit):
+	def f(region):
+		s = region.begin()
+		e = region.end()
+
+		if s == e:
+			if shared.is_inside_string(view, s):
+				view.insert(edit, s, "\\\"")
+				return s + 2
+			else:
+				view.insert(edit, s, "\"\"")
+				return s + 1
+		else:
+			view.insert(edit, s, "\"")
+			view.insert(edit, e + 1, "\"")
+			return sublime.Region(s + 1, e + 1)
+
+	shared.edit_selections(view, f)
+
 def paredit_newline(view, edit):
 	def f(region):
 		s = region.begin()
@@ -113,6 +132,10 @@ class Paredit_open_curlyCommand(sublime_plugin.TextCommand):
 class Paredit_close_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_close_curly(self.view, edit)
+
+class Paredit_doublequoteCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_doublequote(self.view, edit)
 
 class Paredit_newlineCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
