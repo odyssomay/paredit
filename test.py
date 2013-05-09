@@ -70,6 +70,7 @@ def paredit_test_insertion(view, edit):
 		,	["(|)", "((|))"]
 		,	["|hel|lo", "(|hel)lo"]
 		,	["(def s \"hel|lo\")", "(def s \"hel(|lo\")"]
+		,	["; |", "; (|"]
 		])
 	run_tests(view, edit,
 		"paredit_close_round",
@@ -78,6 +79,7 @@ def paredit_test_insertion(view, edit):
 		,	["(|)", "()|"]
 		,	["(|  )", "()|"]
 		,	["(def s \"hel|lo\")", "(def s \"hel)|lo\")"]
+		,	["; |", "; )|"]
 		,	["(def |a 3)", "(def a 3)|"]
 		,	["(def |a 3    )", "(def a 3)|"]
 		])
