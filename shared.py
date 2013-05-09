@@ -7,7 +7,16 @@ def erase_region(view, edit, region):
 	return region.begin()
 
 def is_inside_string(view, point):
-	return False
+	i = 0
+	inside_string = False
+
+	while i < point:
+		c = view.substr(i)
+		if c == "\"":
+			inside_string = not inside_string
+		i += 1
+
+	return inside_string
 
 whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
