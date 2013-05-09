@@ -7,16 +7,14 @@ def erase_region(view, edit, region):
 	return region.begin()
 
 def is_inside_string(view, point):
-	i = 0
-	inside_string = False
+	test_region = sublime.Region(point, point)
+	regions = view.find_by_selector("string")
 
-	while i < point:
-		c = view.substr(i)
-		if c == "\"":
-			inside_string = not inside_string
-		i += 1
+	for region in regions:
+		if region.contains(test_region):
+			return True
 
-	return inside_string
+	return False
 
 whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
