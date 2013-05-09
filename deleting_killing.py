@@ -5,27 +5,38 @@ try:
 except:
 	import shared
 
+def char_type(c):
+	if c == "\"": return "string"
+	elif c == "(" or c == "[" or c == "{": return "lbracket"
+	elif c == ")" or c == "]" or c == "}": return "rbracket"
+
+def remove_empty_expression(view, edit, point, fail_direction):
+	(lb, rb) = shared.get_expression(view, point)
+	if lb and rb:
+		expr_region = sublime.Region(lb, rb)
+		expression = view.substr(expr_region)
+		if shared.is_expression_empty(expression):
+			return shared.erase_region(view, edit, expr_region)
+		else:
+			return sublime.Region(point + fail_direction, point + fail_direction)
+	else:
+		return point
+
 def paredit_forward_delete(view, edit):
 	def f(region):
 		if not region.begin() == region.end():
 			return shared.erase_region(view, edit, region)
 
+		point = region.begin()
 		next_char = view.substr(region.begin())
-		if next_char == "\"" or next_char == "(" or next_char == "[" or next_char == "{":
-			return region.begin() + 1
-		elif next_char == ")" or next_char == "]" or next_char == "}":
-			(lb, rb) = shared.get_expression(view, region.begin())
-			if not (lb == None or rb == None):
-				expr_region = sublime.Region(lb, rb)
-				expression = view.substr(expr_region)
-				if shared.is_expression_empty(expression):
-					return shared.erase_region(view, edit, expr_region)
-				else:
-					return sublime.Region(region.begin() + 1, region.begin() + 1)
-			else:
-				return region
+		next_char_type = char_type(next_char)
+
+		if   next_char_type == "string":   return region.begin() + 1
+		elif next_char_type == "lbracket": return region.begin() + 1
+		elif next_char_type == "rbracket":
+			return remove_empty_expression(view, edit, point, 1)
 		else:
-			view.erase(edit, sublime.Region(region.begin(), region.begin() + 1))
+			view.erase(edit, sublime.Region(point, point + 1))
 			return region
 
 	shared.edit_selections(view, f)
@@ -35,23 +46,17 @@ def paredit_backward_delete(view, edit):
 		if not region.begin() == region.end():
 			return shared.erase_region(view, edit, region)
 
-		next_char = view.substr(region.begin() - 1)
-		if next_char == "\"" or next_char == ")" or next_char == "]" or next_char == "}":
-			return region.begin() - 1
-		elif next_char == "(" or next_char == "[" or next_char == "{":
-			(lb, rb) = shared.get_expression(view, region.begin())
-			if not (lb == None or rb == None):
-				expr_region = sublime.Region(lb, rb)
-				expression = view.substr(expr_region)
-				if shared.is_expression_empty(expression):
-					return shared.erase_region(view, edit, expr_region)
-				else:
-					return sublime.Region(region.begin() - 1, region.begin() - 1)
-			else:
-				return region
+		point = region.begin()
+		next_char = view.substr(point - 1)
+		next_char_type = char_type(next_char)
+
+		if   next_char_type == "string":   return region.begin() - 1
+		elif next_char_type == "rbracket": return region.begin() - 1
+		elif next_char_type == "lbracket":
+			return remove_empty_expression(view, edit, point, -1)
 		else:
-			view.erase(edit, sublime.Region(region.begin(), region.begin() - 1))
-			return region.begin() - 1
+			view.erase(edit, sublime.Region(point - 1, point))
+			return point - 1
 
 	shared.edit_selections(view, f)
 
