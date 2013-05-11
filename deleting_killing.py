@@ -55,6 +55,10 @@ def paredit_delete(view, edit, is_forward):
 				return remove_empty_expression(view, edit, point, direction)
 			else:
 				return region.begin() + direction
+		elif shared.is_inside_string(view, point):
+			# Same purpose as is_inside_comment above
+			# but has to be tested after the elif above.
+			pass
 		elif next_char_type == skip_char_type: return region.begin() + direction
 		elif next_char_type:
 			return remove_empty_expression(view, edit, point, direction)
