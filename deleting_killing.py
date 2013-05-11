@@ -22,6 +22,14 @@ def remove_empty_expression(view, edit, point, fail_direction):
 	else:
 		return point
 
+def standard_delete(view, edit, point, is_forward):
+	if is_forward:
+		view.erase(edit, sublime.Region(point, point + 1))
+		return point
+	else:
+		view.erase(edit, sublime.Region(point - 1, point))
+		return max(0, point - 1)
+
 def paredit_delete(view, edit, is_forward):
 	def f(region):
 		if not region.begin() == region.end():
@@ -40,7 +48,9 @@ def paredit_delete(view, edit, is_forward):
 
 		next_char_type = char_type(next_char)
 
-		if next_char_type == "string":
+		if shared.is_inside_comment(view, point):
+			pass # pass to else below
+		elif next_char_type == "string":
 			if shared.is_inside_string(view, point):
 				return remove_empty_expression(view, edit, point, direction)
 			else:
@@ -48,13 +58,9 @@ def paredit_delete(view, edit, is_forward):
 		elif next_char_type == skip_char_type: return region.begin() + direction
 		elif next_char_type:
 			return remove_empty_expression(view, edit, point, direction)
-		else:
-			if is_forward:
-				view.erase(edit, sublime.Region(point, point + direction))
-				return region
-			else:
-				view.erase(edit, sublime.Region(point - 1, point))
-				return point - 1
+
+		# else
+		return standard_delete(view, edit, point, is_forward)
 
 	shared.edit_selections(view, f)
 
