@@ -77,7 +77,7 @@ def get_expression(view, point):
 def edit_selections(view, f):
 	new_regions = []
 
- 	for i in range(len(view.sel())):
+	for i in range(len(view.sel())):
 		region = view.sel()[i]
 		new_region = f(region)
 		new_regions += [new_region]
