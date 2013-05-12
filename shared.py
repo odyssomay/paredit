@@ -122,3 +122,6 @@ def remove_spaces(view, edit, point):
 
 	view.erase(edit, sublime.Region(left_limit, right_limit))
 	return left_limit
+
+def should_paredit(view):
+	return True

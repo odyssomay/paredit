@@ -114,32 +114,40 @@ def paredit_newline(view, edit):
 #### Commands
 class Paredit_open_roundCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_open_round(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_open_round(self.view, edit)
 
 class Paredit_close_roundCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_close_round(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_close_round(self.view, edit)
 
 class Paredit_open_squareCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_open_square(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_open_square(self.view, edit)
 
 class Paredit_close_squareCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_close_square(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_close_square(self.view, edit)
 
 class Paredit_open_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_open_curly(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_open_curly(self.view, edit)
 
 class Paredit_close_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_close_curly(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_close_curly(self.view, edit)
 
 class Paredit_doublequoteCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_doublequote(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_doublequote(self.view, edit)
 
 class Paredit_newlineCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		paredit_newline(self.view, edit)
+		if shared.should_paredit(self.view):
+			paredit_newline(self.view, edit)
