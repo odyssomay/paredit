@@ -62,6 +62,16 @@ def find_enclosing_brackets(view, point, left_bracket, right_bracket):
 
 	return (left_parens, right_parens)
 
+def max_with_none(*args):
+	out = args[0]
+
+	for arg in args:
+		if arg:
+			if not out or (out and arg > out):
+				out = arg
+
+	return out
+
 def get_expression(view, point):
 	string_region = is_inside_string(view, point)
 	if string_region: return (string_region.begin(), string_region.end())
@@ -70,9 +80,12 @@ def get_expression(view, point):
 	brack = (lbrack, rbrack) = find_enclosing_brackets(view, point, "[", "]")
 	curly = (lcurly, rcurly) = find_enclosing_brackets(view, point, "{", "}")
 
-	if lbrack > lparen: return brack
-	elif lcurly > lparen or lcurly > lbrack: return curly
-	else: return paren
+	m = max_with_none(lparen, lbrack, lcurly)
+
+	if   m == lparen: return paren
+	elif m == lbrack: return brack
+	elif m == lcurly: return curly
+	else: return (None, None)
 
 def edit_selections(view, f):
 	new_regions = []
