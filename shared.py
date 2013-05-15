@@ -121,3 +121,8 @@ def remove_spaces(view, edit, point):
 
 def should_paredit(view):
 	return True
+
+def char_type(c):
+	if c == "\"": return "string"
+	elif c == "(" or c == "[" or c == "{": return "lbracket"
+	elif c == ")" or c == "]" or c == "}": return "rbracket"
