@@ -6,22 +6,18 @@ def erase_region(view, edit, region):
 	view.erase(edit, region)
 	return region.begin()
 
-def is_region_inside_regions(test_region, regions):
+def is_point_inside_regions(point, regions):
 	for region in regions:
-		if region.contains(test_region):
+		if point >= region.begin() and point < region.end():
 			return region
 
-	return False
-
 def is_inside_string(view, point):
-	test_region = sublime.Region(point, point)
 	regions = view.find_by_selector("string")
-	return is_region_inside_regions(test_region, regions)
+	return is_point_inside_regions(point, regions)
 
 def is_inside_comment(view, point):
-	test_region = sublime.Region(point, point)
 	regions = view.find_by_selector("comment")
-	return is_region_inside_regions(test_region, regions)
+	return is_point_inside_regions(point, regions)
 
 whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
