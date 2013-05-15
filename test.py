@@ -180,6 +180,18 @@ def paredit_test_movement_navigation(view, edit):
 		,	["(|(foo) bar)", "|((foo) bar)"]
 		])
 
+def paredit_test_depth_changing(view, edit):
+	run_tests(view, edit,
+		"paredit_wrap_round",
+		[
+			["(foo |bar baz)", "(foo (|bar) baz)"]
+		])
+	run_tests(view, edit,
+		"paredit_splice_sexp",
+		[
+			["(foo (bar| baz) quux)", "(foo bar| baz quux)"]
+		])
+
 ####
 #### Commands
 class Paredit_test_insertionCommand(sublime_plugin.TextCommand):
@@ -194,6 +206,10 @@ class Paredit_test_movement_navigationCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_test_movement_navigation(self.view, edit)
 
+class Paredit_test_depth_changingCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_test_depth_changing(self.view, edit)
+
 class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		window = sublime.active_window()
@@ -203,6 +219,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 			"paredit_test_insertion"
 		,	"paredit_test_deleting_killing"
 		,	"paredit_test_movement_navigation"
+		,	"paredit_test_depth_changing"
 		]
 
 		view.run_command("set_file_type", {"syntax": "Packages/Clojure/Clojure.tmLanguage"})
