@@ -26,7 +26,7 @@ def paredit_close_remove_spaces(view, edit, rb):
 
 	while i >= 0:
 		c = view.substr(i)
-		if not c == " ":
+		if not c.isspace():
 			break
 		i -= 1
 
