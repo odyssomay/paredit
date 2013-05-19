@@ -111,11 +111,29 @@ def paredit_kill(view, edit):
 def paredit_kill_expression(view, edit):
 	paredit_kill_abstract(view, edit, True)
 
+def paredit_kill_word(view, edit, is_forward):
+	def f(region):
+		if not region.a == region.b:
+			return region
+		point = region.a
+
+		if is_forward:
+			(lw, rw) = shared.get_next_word(view, point)
+		else:
+			(lw, rw) = shared.get_previous_word(view, point)
+
+		if lw and rw:
+			return shared.erase_region(view, edit, sublime.Region(lw, rw))
+
+		return region
+
+	shared.edit_selections(view, f)
+
 def paredit_forward_kill_word(view, edit):
-	pass
+	paredit_kill_word(view, edit, True)
 
 def paredit_backward_kill_word(view, edit):
-	pass
+	paredit_kill_word(view, edit, False)
 
 ####
 #### Commands
