@@ -33,6 +33,10 @@ called *paredit_open_round*.
 * paredit-forward
 * paredit-backward
 
+### Depth-Changing Commands
+
+* paredit-splice-sexp
+
 ### Extra commands
 
 These are not part of emacs paredit.
