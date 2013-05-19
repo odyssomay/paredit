@@ -5,18 +5,22 @@ try:
 except:
 	import shared
 
+def insert_brackets(view, edit, lbracket, rbracket, region):
+	view.insert(edit, region.begin(), lbracket)
+	view.insert(edit, region.end() + 1, rbracket)
+	return region.begin() + 1
+
 def paredit_wrap(view, edit, lbracket, rbracket):
 	def f(region):
 		if not region.a == region.b:
-			return region
+			return insert_brackets(view, edit, lbracket, rbracket, region)
 
 		point = region.a
 
 		(lb, rb) = shared.get_next_expression(view, point)
 		if lb and rb:
-			view.insert(edit, lb, lbracket)
-			view.insert(edit, rb + 1, rbracket)
-			return point + 1
+			return insert_brackets(view, edit, lbracket, rbracket,
+				sublime.Region(lb, rb))
 
 		return point
 
