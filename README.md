@@ -7,7 +7,7 @@ The plugin is under development, but intended to be finished before 2013-05-25.
 
 ## Implementation Status
 
-Below is a list of all currently fully implemented paredit commands.
+Below is a list of all currently implemented paredit commands.
 
 Note: The actual name of the commands inside sublime text use 
 underscores instead of hyphens. E.g. *paredit-open-round* is
