@@ -6,7 +6,21 @@ except:
 	import shared
 
 def paredit_wrap(view, edit, lbracket, rbracket):
-	pass
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		point = region.a
+
+		(lb, rb) = shared.get_next_expression(view, point)
+		if lb and rb:
+			view.insert(edit, lb, lbracket)
+			view.insert(edit, rb + 1, rbracket)
+			return point + 1
+
+		return point
+
+	shared.edit_selections(view, f)
 
 def paredit_wrap_round(view, edit):
 	paredit_wrap(view, edit, "(", ")")
