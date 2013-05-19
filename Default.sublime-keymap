@@ -80,6 +80,10 @@
 	"keys": ["alt+shift+["],
 	"command": "paredit_wrap_curly"
  }
+,{
+	"keys": ["alt+s"],
+	"command": "paredit_splice_sexp"
+ }
 
 ////
 //// Bargafe & slurpage
