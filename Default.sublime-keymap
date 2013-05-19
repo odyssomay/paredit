@@ -31,6 +31,10 @@
 	"keys": ["\""],
 	"command": "paredit_doublequote"
  }
+,{
+	"keys": ["ctrl+j"],
+	"command": "paredit_newline"
+ }
 
 ////
 //// Deleting & killing
