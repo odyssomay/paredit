@@ -30,6 +30,8 @@ def paredit_forward(view, edit):
 					(lb, rb) = shared.get_expression(view, i + 1)
 					if rb: return rb
 
+		return view.size() - 1
+
 	shared.edit_selections(view, f)
 
 def paredit_backward(view, edit):
