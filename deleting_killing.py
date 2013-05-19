@@ -111,6 +111,12 @@ def paredit_kill(view, edit):
 def paredit_kill_expression(view, edit):
 	paredit_kill_abstract(view, edit, True)
 
+def paredit_forward_kill_word(view, edit):
+	pass
+
+def paredit_backward_kill_word(view, edit):
+	pass
+
 ####
 #### Commands
 class Paredit_forward_deleteCommand(sublime_plugin.TextCommand):
@@ -132,3 +138,13 @@ class Paredit_kill_expressionCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if shared.should_paredit(self.view):
 			paredit_kill_expression(self.view, edit)
+
+class Paredit_forward_kill_wordCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		if shared.should_paredit(self.view):
+			paredit_forward_kill_word(self.view, edit)
+
+class Paredit_backward_kill_wordCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		if shared.should_paredit(self.view):
+			paredit_backward_kill_word(self.view, edit)
