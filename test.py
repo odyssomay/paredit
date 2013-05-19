@@ -196,7 +196,7 @@ def paredit_test_depth_changing(view, edit):
 		,	["(def a \"hello| world\")", "(def a hello| world)"]
 		,	["(def a \"hello world\"|)", "def a \"hello world\"|"]
 		,	["(def a {|:a 3 :b 4})", "(def a |:a 3 :b 4)"]
-		, ["(def a {:a 3 :b 4|})", "(def a :a 3 :b 4|)"]
+		,	["(def a {:a 3 :b 4|})", "(def a :a 3 :b 4|)"]
 		])
 
 ####
