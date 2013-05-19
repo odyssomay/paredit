@@ -7,59 +7,58 @@ except:
 
 def paredit_forward(view, edit):
 	def f(region):
-		if region.a == region.b:
-			point = region.a
-		else:
+		if not region.a == region.b:
 			return region
 
-		c = view.substr(point)
-		t = shared.char_type(c)
-		if not (t or c.isspace()):
-			for (i, c) in shared.walk_right(view, point):
-				if c.isspace():
-					return i
+		point = region.a
 
-			return view.size() - 1
+		if shared.is_inside_string(view, point):
+			(lb, rb) = shared.get_expression(view, point)
+			target_point = rb - 1
+			if point == target_point:
+				return point + 1
+			return rb - 1
 
-		for (i, c) in shared.walk_right(view, point):
-			if not c.isspace():
-				t = shared.char_type(c)
-				if t == "rbracket":
-					return i + 1
-				if t == "lbracket":
-					(lb, rb) = shared.get_expression(view, i + 1)
-					if rb: return rb
+		(word_start, word_end) = shared.get_word(view, point)
+		if word_start and word_end:
+			return word_end
 
-		return view.size() - 1
+		(next_left, next_right) = shared.get_next_expression(view, point)
+		if next_right:
+			return next_right
+		else:
+			(lb, rb) = shared.get_expression(view, point)
+			if rb: return rb
+			return point + 1
 
 	shared.edit_selections(view, f)
 
 def paredit_backward(view, edit):
 	def f(region):
-		if region.a == region.b:
-			point = region.a
-		else:
+		if not region.a == region.b:
 			return region
 
-		c = view.substr(point)
-		t = shared.char_type(c)
-		if not (t or c.isspace()):
-			for (i, c) in shared.walk_left(view, point - 1):
-				if c.isspace():
-					return i
+		point = region.a
 
-			return 0
+		if shared.is_inside_string(view, point):
+			(lb, rb) = shared.get_expression(view, point)
+			target_point = lb + 1
+			if point == target_point:
+				point - 1
+			return lb + 1
 
-		for (i, c) in shared.walk_left(view, point - 1):
-			if not c.isspace():
-				t = shared.char_type(c)
-				if t == "lbracket":
-					return i
-				if t == "rbracket":
-					(lb, rb) = shared.get_expression(view, i)
-					if lb: return lb
+		(word_start, word_end) = shared.get_word(view, point - 1)
 
-		return 0
+		if word_start and word_end:
+			return word_start
+
+		(prev_left, prev_right) = shared.get_previous_expression(view, point - 1)
+		if prev_left:
+			return prev_left
+		else:
+			(lb, rb) = shared.get_expression(view, point)
+			if lb: return lb
+			return point - 1
 
 	shared.edit_selections(view, f)
 
