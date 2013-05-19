@@ -27,6 +27,8 @@ called *paredit_open_round*.
 * paredit-forward-delete
 * paredit-backward-delete
 * paredit-kill
+* paredit-forward-kill-word
+* paredit-backward-kill-word
 
 ### Movement & Navigation
 
