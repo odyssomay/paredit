@@ -115,6 +115,23 @@ def get_expression(view, point):
 	elif m == lcurly: return curly
 	else: return (None, None)
 
+def get_next_expression(view, point):
+	for (i, c) in walk_right(view, point):
+		if not c.isspace():
+			if char_type(c) == "lbracket":
+				return get_expression(view, i + 1)
+			elif char_type(c) == "rbracket":
+				return (None, None)
+
+def get_previous_expression(view, point):
+	for (i, c) in walk_left(view, point):
+		if not c.isspace():
+			t = char_type(c)
+			if t == "rbracket":
+				return get_expression(view, i)
+			elif t == "lbracket":
+				return (None, None)
+
 def get_word(view, point):
 	word_left = None
 	word_right = None
