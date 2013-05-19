@@ -52,13 +52,24 @@ def paredit_delete(view, edit, is_forward):
 			pass # pass to else below
 		elif next_char_type == "string":
 			if shared.is_inside_string(view, point):
-				return remove_empty_expression(view, edit, point, direction)
+				if ((not is_forward) and
+				    (point - 2 >= 0) and
+				    view.substr(point - 2) == "\\"):
+					return shared.erase_region(view, edit, sublime.Region(point, point - 2))
+				else:
+					return remove_empty_expression(view, edit, point, direction)
 			else:
 				return region.begin() + direction
 		elif shared.is_inside_string(view, point):
 			# Same purpose as is_inside_comment above
 			# but has to be tested after the elif above.
-			pass
+			if (is_forward and
+			    (point + 2 < view.size()) and
+			    view.substr(sublime.Region(point, point + 2)) == "\\\""):
+				return shared.erase_region(
+					view, edit, sublime.Region(point, point + 2))
+			else:
+				pass
 		elif next_char_type == skip_char_type: return region.begin() + direction
 		elif next_char_type:
 			return remove_empty_expression(view, edit, point, direction)
