@@ -90,4 +90,12 @@
 
 ////
 //// Miscellaneous commands
+,{
+	"keys": ["alt+shift+S"],
+	"command": "paredit_split_sexp"
+ }
+,{
+	"keys": ["alt+shift+j"],
+	"command": "paredit_join_sexp"
+ }
 ]

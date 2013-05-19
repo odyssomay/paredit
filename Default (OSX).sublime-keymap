@@ -28,4 +28,15 @@
 	"keys": ["super+s"],
 	"command": "paredit_splice_sexp"
  }
+
+////
+//// Miscellaneous commands
+,{
+	"keys": ["super+shift+S"],
+	"command": "paredit_split_sexp"
+ }
+,{
+	"keys": ["super+shift+j"],
+	"command": "paredit_join_sexp"
+ }
 ]
