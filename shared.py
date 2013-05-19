@@ -2,10 +2,37 @@
 import sublime
 import re
 
+####
+#### Removing
 def erase_region(view, edit, region):
 	view.erase(edit, region)
 	return region.begin()
 
+def remove_spaces(view, edit, point):
+	i = point - 1
+
+	while i >= 0:
+		c = view.substr(i)
+		if not c == " ":
+			break
+		i -= 1
+
+	left_limit = i + 1
+	i = point
+
+	while i < view.size():
+		c = view.substr(i)
+		if not c == " ":
+			break
+		i += 1
+
+	right_limit = i
+
+	view.erase(edit, sublime.Region(left_limit, right_limit))
+	return left_limit
+
+####
+#### Context checking
 def is_point_inside_regions(point, regions):
 	for region in regions:
 		if point >= region.begin() and point < region.end():
@@ -23,6 +50,8 @@ whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
 	return whitespace_matcher.match(string[1:-1])
 
+####
+#### Get expression
 def find_enclosing_brackets(view, point, left_bracket, right_bracket):
 	left_parens = None
 	right_parens = None
@@ -96,37 +125,13 @@ def edit_selections(view, f):
 		if not region == None:
 			view.sel().add(region)
 
-def remove_spaces(view, edit, point):
-	i = point - 1
-
-	while i >= 0:
-		c = view.substr(i)
-		if not c == " ":
-			break
-		i -= 1
-
-	left_limit = i + 1
-	i = point
-
-	while i < view.size():
-		c = view.substr(i)
-		if not c == " ":
-			break
-		i += 1
-
-	right_limit = i
-
-	view.erase(edit, sublime.Region(left_limit, right_limit))
-	return left_limit
-
-def should_paredit(view):
-	return True
-
 def char_type(c):
 	if c == "\"": return "string"
 	elif c == "(" or c == "[" or c == "{": return "lbracket"
 	elif c == ")" or c == "]" or c == "}": return "rbracket"
 
+####
+#### Walking
 def walk_left(view, point):
 	i = point
 
@@ -142,3 +147,8 @@ def walk_right(view, point):
 		c = view.substr(i)
 		yield (i, c)
 		i += 1
+
+####
+#### Configuration
+def should_paredit(view):
+	return True
