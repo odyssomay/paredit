@@ -1,4 +1,4 @@
-
+[
 ////
 //// Movement & navigation
 {
@@ -9,3 +9,4 @@
 	"keys": ["ctrl+super+b"],
 	"command": "paredit_backward"
  }
+]
