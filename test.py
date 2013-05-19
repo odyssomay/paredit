@@ -240,6 +240,21 @@ def paredit_test_barfage_slurpage(view, edit):
 			["(foo (bar baz| quux) zot)", "(foo bar (baz| quux) zot)"]
 		])
 
+def paredit_test_miscellaneous(view, edit):
+	run_tests(view, edit,
+		"paredit_split_sexp",
+		[
+			["(hello| world)", "(hello)| (world)"]
+		,	["\"hello, |world!\"", "\"hello, \"| \"world!\""]
+		])
+	run_tests(view, edit,
+		"paredit_join_sexp",
+		[
+			["(hello)| (world)", "(hello| world)"]
+		,	["\"Hello, \"| \"world!\"", "\"Hello, world!\""]
+		,	["hello-\n|  world", "hello-|world"]
+		])
+
 ####
 #### Commands
 class Paredit_test_insertionCommand(sublime_plugin.TextCommand):
@@ -262,6 +277,10 @@ class Paredit_test_barfage_slurpageCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_test_barfage_slurpage(self.view, edit)
 
+class Paredit_test_miscellaneousCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_test_miscellaneous(self.view, edit)
+
 class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		window = sublime.active_window()
@@ -273,6 +292,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 		,	"paredit_test_movement_navigation"
 		,	"paredit_test_depth_changing"
 		,	"paredit_test_barfage_slurpage"
+		,	"paredit_test_miscellaneous"
 		]
 
 		view.run_command("set_file_type", {"syntax": "Packages/Clojure/Clojure.tmLanguage"})
