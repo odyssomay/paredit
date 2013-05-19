@@ -47,19 +47,19 @@ def run_test(view, edit, command, test):
 	view.run_command(command)
 	actual_result = view.substr(sublime.Region(start_index, view.size()))
 	actual_carets = get_carets(view, start_index)
+	view.erase(edit, sublime.Region(start_index, view.size()))
 	if not (actual_result == result and result_carets == actual_carets):
 		actual_result = add_carets(actual_result, actual_carets)
 		view.insert(edit, view.size(),
-			"\nFAILED! Input: \"" + init_with_carets +
+			"FAILED! Input: \"" + init_with_carets +
 			"\", Expected: \"" + result_with_carets +
-			"\", Result: \"" + actual_result + "\"")
+			"\", Result: \"" + actual_result + "\"\n")
 
 def run_tests(view, edit, command, tests):
 	write(view, edit, "========================================")
-	write(view, edit, "Testing " + command)
+	write(view, edit, "Testing " + command + "\n")
 	for test in tests:
 		run_test(view, edit, command, test)
-		write(view, edit, "")
 	write(view, edit, "")
 
 def paredit_test_insertion(view, edit):
