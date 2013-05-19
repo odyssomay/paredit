@@ -193,6 +193,10 @@ def paredit_test_depth_changing(view, edit):
 		"paredit_splice_sexp",
 		[
 			["(foo (bar| baz) quux)", "(foo bar| baz quux)"]
+		,	["(def a \"hello| world\")", "(def a hello| world)"]
+		,	["(def a \"hello world\"|)", "def a \"hello world\"|"]
+		,	["(def a {|:a 3 :b 4})", "(def a |:a 3 :b 4)"]
+		, ["(def a {:a 3 :b 4|})", "(def a :a 3 :b 4|)"]
 		])
 
 ####
