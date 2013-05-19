@@ -216,6 +216,30 @@ def paredit_test_depth_changing(view, edit):
 		,	["(def a {:a 3 :b 4|})", "(def a :a 3 :b 4|)"]
 		])
 
+def paredit_test_barfage_slurpage(view, edit):
+	run_tests(view, edit,
+		"paredit_forward_slurp_sexp",
+		[
+			["(foo (bar |baz) quux zot)", "(foo (bar |baz quux) zot)"]
+		,	["(a b ((c| d)) e f)", "(a b ((c| d) e) f)"]
+		,	["(a b ((c| d) e) f)", "(a b ((c| d e)) f)"]
+		])
+	run_tests(view, edit,
+		"paredit_forward_barf_sexp",
+		[
+			["(foo (bar |baz quux) zot)", "(foo (bar |baz) quux zot)"]
+		])
+	run_tests(view, edit,
+		"paredit_backward_slurp_sexp",
+		[
+			["(foo bar (baz| quux) zot)", "(foo (bar baz| quux) zot)"]
+		])
+	run_tests(view, edit,
+		"paredit_backward_barf_sexp",
+		[
+			["(foo (bar baz| quux) zot)", "(foo bar (baz| quux) zot)"]
+		])
+
 ####
 #### Commands
 class Paredit_test_insertionCommand(sublime_plugin.TextCommand):
@@ -234,6 +258,10 @@ class Paredit_test_depth_changingCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_test_depth_changing(self.view, edit)
 
+class Paredit_test_barfage_slurpageCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_test_barfage_slurpage(self.view, edit)
+
 class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		window = sublime.active_window()
@@ -244,6 +272,7 @@ class Paredit_run_testsCommand(sublime_plugin.TextCommand):
 		,	"paredit_test_deleting_killing"
 		,	"paredit_test_movement_navigation"
 		,	"paredit_test_depth_changing"
+		,	"paredit_test_barfage_slurpage"
 		]
 
 		view.run_command("set_file_type", {"syntax": "Packages/Clojure/Clojure.tmLanguage"})
