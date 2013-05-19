@@ -112,6 +112,8 @@ def get_expression(view, point):
 	elif m == lcurly: return curly
 	else: return (None, None)
 
+####
+#### Misc
 def edit_selections(view, f):
 	new_regions = []
 
