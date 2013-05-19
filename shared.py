@@ -115,6 +115,25 @@ def get_expression(view, point):
 	elif m == lcurly: return curly
 	else: return (None, None)
 
+def get_word(view, point):
+	word_left = None
+	word_right = None
+
+	if not is_inside_word(view.substr(point)):
+		return (None, None)
+
+	for (i, c) in walk_left(view, point):
+		if not is_inside_word(c):
+			word_left = i + 1
+			break
+
+	for (i, c) in walk_right(view, point):
+		if not is_inside_word(c):
+			word_right = i
+			break
+
+	return (word_left, word_right)
+
 ####
 #### Misc
 def edit_selections(view, f):
