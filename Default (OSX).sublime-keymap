@@ -9,4 +9,23 @@
 	"keys": ["ctrl+super+b"],
 	"command": "paredit_backward"
  }
+
+////
+//// Depth-changing commands
+,{
+	"keys": ["super+shift+9"],
+	"command": "paredit_wrap_round"
+ }
+,{
+	"keys": ["super+["],
+	"command": "paredit_wrap_square"
+ }
+,{
+	"keys": ["super+shift+["],
+	"command": "paredit_wrap_curly"
+ }
+,{
+	"keys": ["super+s"],
+	"command": "paredit_splice_sexp"
+ }
 ]
