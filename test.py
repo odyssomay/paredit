@@ -245,13 +245,13 @@ def paredit_test_miscellaneous(view, edit):
 		"paredit_split_sexp",
 		[
 			["(hello| world)", "(hello)| (world)"]
-		,	["\"hello, |world!\"", "\"hello, \"| \"world!\""]
+		,	["(foo \"hello, |world!\")", "(foo \"hello, \"| \"world!\")"]
 		])
 	run_tests(view, edit,
 		"paredit_join_sexp",
 		[
 			["(hello)| (world)", "(hello| world)"]
-		,	["\"Hello, \"| \"world!\"", "\"Hello, world!\""]
+		,	["(foo \"Hello, \"| \"world!\")", "(foo \"Hello, world!\")"]
 		,	["hello-\n|  world", "hello-|world"]
 		])
 
