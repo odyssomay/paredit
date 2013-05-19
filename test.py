@@ -113,6 +113,7 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(quux \"|zot\")", "(quux \"|ot\")"]
 		,	["(quux \"z|(ot\")", "(quux \"z|ot\")"]
 		,	["(quux \"|\")", "(quux |)"]
+		,	["(quux \"|\\\"\")", "(quux \"|\")"]
 		,	["(foo (|) bar)", "(foo | bar)"]
 		,	["(foo [|] bar)", "(foo | bar)"]
 		,	["|(foo bar)", "(|foo bar)"]
@@ -130,6 +131,7 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(\"zot|\" quux)", "(\"zo|\" quux)"]
 		,	["(quux \"z(|ot\")", "(quux \"z|ot\")"]
 		,	["(quux \"|\")", "(quux |)"]
+		,	["(quux \"\\\"|\")", "(quux \"|\")"]
 
 		,	["(foo (|) bar)", "(foo | bar)"]
 		,	["(foo [|] bar)", "(foo | bar)"]
