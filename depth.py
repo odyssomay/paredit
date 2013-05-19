@@ -26,7 +26,6 @@ def paredit_splice_sexp(view, edit):
 
 		(lb, rb) = shared.get_expression(view, point)
 		if lb and rb:
-			print(view.substr(sublime.Region(lb, rb)))
 			view.erase(edit, sublime.Region(rb - 1, rb))
 			view.erase(edit, sublime.Region(lb, lb + 1))
 			return point - 1
