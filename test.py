@@ -192,6 +192,16 @@ def paredit_test_depth_changing(view, edit):
 			["(foo |bar baz)", "(foo (|bar) baz)"]
 		])
 	run_tests(view, edit,
+		"paredit_wrap_square",
+		[
+			["(foo |bar baz)", "(foo [|bar] baz)"]
+		])
+	run_tests(view, edit,
+		"paredit_wrap_curly",
+		[
+			["(foo |bar baz)", "(foo {|bar} baz)"]
+		])
+	run_tests(view, edit,
 		"paredit_splice_sexp",
 		[
 			["(foo (bar| baz) quux)", "(foo bar| baz quux)"]
