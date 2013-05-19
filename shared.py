@@ -35,7 +35,7 @@ def remove_spaces(view, edit, point):
 #### Context checking
 def is_point_inside_regions(point, regions):
 	for region in regions:
-		if point >= region.begin() and point < region.end():
+		if point > region.begin() and point < region.end():
 			return region
 
 def is_inside_string(view, point):
