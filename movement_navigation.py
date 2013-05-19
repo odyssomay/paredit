@@ -11,10 +11,10 @@ def paredit_forward(view, edit):
 			point = region.a
 		else:
 			return region
-		
+
 		c = view.substr(point)
 		t = shared.char_type(c)
-		if not (t or c == " "):
+		if not (t or c.isspace()):
 			for (i, c) in shared.walk_right(view, point):
 				if c.isspace():
 					return i
