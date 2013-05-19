@@ -87,8 +87,8 @@ def paredit_backward_delete(view, edit):
 
 def paredit_kill_abstract(view, edit, expression):
 	def f(region):
-		if region.a == region.end:
-			return region
+		if not region.a == region.b:
+			return shared.erase_region(view, edit, region)
 
 		point = region.a
 
