@@ -17,16 +17,13 @@ def paredit_forward(view, edit):
 		c = view.substr(point)
 		t = shared.char_type(c)
 		if not (t or c == " "):
-			while i < view.size():
-				c = view.substr(i)
+			for (i, c) in shared.walk_right(view, point):
 				if c.isspace():
 					return i
-				i += 1
 
-			return i
+			return view.size() - 1
 
-		while i < view.size():
-			c = view.substr(i)
+		for (i, c) in shared.walk_right(view, point):
 			if not c.isspace():
 				t = shared.char_type(c)
 				if t == "rbracket":
@@ -34,8 +31,6 @@ def paredit_forward(view, edit):
 				if t == "lbracket":
 					(lb, rb) = shared.get_expression(view, i + 1)
 					if rb: return rb
-
-			i += 1
 
 	shared.edit_selections(view, f)
 
@@ -51,16 +46,13 @@ def paredit_backward(view, edit):
 		c = view.substr(point)
 		t = shared.char_type(c)
 		if not (t or c.isspace()):
-			while i >= 0:
-				c = view.substr(i)
+			for (i, c) in shared.walk_left(view, point - 1):
 				if c.isspace():
 					return i
-				i -= 1
 
-			return i
+			return 0
 
-		while i >= 0:
-			c = view.substr(i)
+		for (i, c) in shared.walk_left(view, point - 1):
 			if not c.isspace():
 				t = shared.char_type(c)
 				if t == "lbracket":
@@ -69,7 +61,7 @@ def paredit_backward(view, edit):
 					(lb, rb) = shared.get_expression(view, i)
 					if lb: return lb
 
-			i -= 1
+		return 0
 
 	shared.edit_selections(view, f)
 
