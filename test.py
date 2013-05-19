@@ -172,12 +172,15 @@ def paredit_test_movement_navigation(view, edit):
 			["(foo |(bar baz) quux)", "(foo (bar baz)| quux)"]
 		,	["(foo (bar baz)|)", "(foo (bar baz))|"]
 		,	["(f|oo (bar baz))", "(foo| (bar baz))"]
+		,	["(foo)| (bar)", "(foo) (bar)|"]
 		])
 	run_tests(view, edit,
 		"paredit_backward",
 		[
 			["(foo (bar baz)| quux)", "(foo |(bar baz) quux)"]
 		,	["(|(foo) bar)", "|((foo) bar)"]
+		,	["(foo) (bar)|", "(foo) |(bar)"]
+		,	["(foo) |(bar)", "|(foo) (bar)"]
 		])
 
 def paredit_test_depth_changing(view, edit):
