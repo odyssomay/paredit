@@ -28,6 +28,11 @@ called *paredit_open_round*.
 * paredit-backward-delete
 * paredit-kill
 
+### Movement & Navigation
+
+* paredit-forward
+* paredit-backward
+
 ### Extra commands
 
 These are not part of emacs paredit.
