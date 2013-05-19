@@ -53,6 +53,14 @@
 
 ////
 //// Movement & navigation
+,{
+	"keys": ["ctrl+alt+f"],
+	"command": "paredit_forward"
+ }
+,{
+	"keys": ["ctrl+alt+b"],
+	"command": "paredit_backward"
+ }
 
 ////
 //// Depth-changing commands
