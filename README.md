@@ -35,7 +35,12 @@ called *paredit_open_round*.
 
 ### Depth-Changing Commands
 
+* paredit-wrap-round
 * paredit-splice-sexp
+
+### Miscellaneous Commands
+
+* paredit-split-sexp
 
 ### Extra commands
 
