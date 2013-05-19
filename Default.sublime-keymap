@@ -64,6 +64,18 @@
 
 ////
 //// Depth-changing commands
+,{
+	"keys": ["alt+shift+9"],
+	"command": "paredit_wrap_round"
+ }
+,{
+	"keys": ["alt+["],
+	"command": "paredit_wrap_square"
+ }
+,{
+	"keys": ["alt+shift+["],
+	"command": "paredit_wrap_curly"
+ }
 
 ////
 //// Bargafe & slurpage
