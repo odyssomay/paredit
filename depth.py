@@ -18,7 +18,22 @@ def paredit_wrap_curly(view, edit):
 	paredit_wrap(view, edit, "{", "}")
 
 def paredit_splice_sexp(view, edit):
-	pass
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		point = region.a
+
+		(lb, rb) = shared.get_expression(view, point)
+		if lb and rb:
+			print(view.substr(sublime.Region(lb, rb)))
+			view.erase(edit, sublime.Region(rb - 1, rb))
+			view.erase(edit, sublime.Region(lb, lb + 1))
+			return point - 1
+		else:
+			return point
+
+	shared.edit_selections(view, f)
 
 ####
 #### Commands
