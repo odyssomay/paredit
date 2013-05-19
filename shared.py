@@ -50,6 +50,9 @@ whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
 	return whitespace_matcher.match(string[1:-1])
 
+def is_inside_word(c):
+	return not (c.isspace() or char_type(c))
+
 ####
 #### Get expression
 def find_enclosing_brackets(view, point, left_bracket, right_bracket):
