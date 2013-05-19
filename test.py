@@ -166,6 +166,18 @@ def paredit_test_deleting_killing(view, edit):
 		,	["[1 2| 3]", "[|]"]
 		,	["{:a |3 :b 4}", "{|}"]
 		])
+	run_tests(view, edit,
+		"paredit_forward_kill_word",
+		[
+			["|(foo bar)", "(| bar)"]
+		,	["(| bar)", "(|)"]
+		])
+	run_tests(view, edit,
+		"paredit_backward_kill_word",
+		[
+			["(quux)|", "(|)"]
+		,	["(foo |)", "(|)"]
+		])
 
 def paredit_test_movement_navigation(view, edit):
 	run_tests(view, edit,
