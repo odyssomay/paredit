@@ -31,12 +31,6 @@
 	"keys": ["\""],
 	"command": "paredit_doublequote"
  }
-// ,
-// {
-// 	"keys": ["\""],
-// 	"command": "insert",
-// 	"args": {"characters": "\" \""}
-// }
 
 ////
 //// Deleting & killing
