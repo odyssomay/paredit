@@ -126,3 +126,19 @@ def char_type(c):
 	if c == "\"": return "string"
 	elif c == "(" or c == "[" or c == "{": return "lbracket"
 	elif c == ")" or c == "]" or c == "}": return "rbracket"
+
+def walk_left(view, point):
+	i = point
+
+	while i >= 0:
+		c = view.substr(i)
+		yield (i, c)
+		i -= 1
+
+def walk_right(view, point):
+	i = point
+
+	while i < view.size():
+		c = view.substr(i)
+		yield (i, c)
+		i += 1
