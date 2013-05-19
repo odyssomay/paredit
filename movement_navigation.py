@@ -11,9 +11,7 @@ def paredit_forward(view, edit):
 			point = region.a
 		else:
 			return region
-
-		i = point
-
+		
 		c = view.substr(point)
 		t = shared.char_type(c)
 		if not (t or c == " "):
@@ -40,8 +38,6 @@ def paredit_backward(view, edit):
 			point = region.a
 		else:
 			return region
-
-		i = point - 1
 
 		c = view.substr(point)
 		t = shared.char_type(c)
