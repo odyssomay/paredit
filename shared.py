@@ -151,6 +151,30 @@ def get_word(view, point):
 
 	return (word_left, word_right)
 
+def get_next_word(view, point):
+	word_start = None
+
+	for (i, c) in walk_right(view, point):
+		if is_inside_word(c):
+			if not word_start:
+				word_start = i
+		elif word_start:
+			return (word_start, i)
+
+	return (word_start, view.size())
+
+def get_previous_word(view, point):
+	word_end = None
+
+	for (i, c) in walk_left(view, point - 1):
+		if is_inside_word(c):
+			if not word_end:
+				word_end = i + 1
+		elif word_end:
+			return (i + 1, word_end)
+
+	return (0, word_end)
+
 ####
 #### Misc
 def edit_selections(view, f):
