@@ -1,0 +1,11 @@
+
+////
+//// Movement & navigation
+{
+	"keys": ["ctrl+super+f"],
+	"command": "paredit_forward"
+ }
+,{
+	"keys": ["ctrl+super+b"],
+	"command": "paredit_backward"
+ }
