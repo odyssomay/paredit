@@ -192,6 +192,9 @@ def paredit_test_depth_changing(view, edit):
 		"paredit_wrap_round",
 		[
 			["(foo |bar baz)", "(foo (|bar) baz)"]
+		,	["(foo| (bar) (baz))", "(foo (|(bar)) (baz))"]
+		,	["(foo| \"bar\")", "(foo (|\"bar\"))"]
+		,	["(foo |bar| baz)", "(foo (|bar) baz)"]
 		])
 	run_tests(view, edit,
 		"paredit_wrap_square",
