@@ -95,6 +95,22 @@
 
 ////
 //// Bargafe & slurpage
+,{
+	"keys": ["ctrl+shift+0"],
+	"command": "paredit_forward_slurp_sexp"
+ }
+,{
+	"keys": ["ctrl+shift+]"],
+	"command": "paredit_forward_barf_sexp"
+ }
+,{
+	"keys": ["ctrl+shift+9"],
+	"command": "paredit_backward_slurp_sexp"
+ }
+,{
+	"keys": ["ctrl+shift+["],
+	"command": "paredit_backward_barf_sexp"
+ }
 
 ////
 //// Miscellaneous commands
