@@ -119,7 +119,7 @@
 ////
 //// Miscellaneous commands
 ,{
-	"keys": ["alt+shift+S"],
+	"keys": ["alt+shift+s"],
 	"command": "paredit_split_sexp"
  }
 ,{

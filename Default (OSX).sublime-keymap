@@ -47,7 +47,7 @@
 ////
 //// Miscellaneous commands
 ,{
-	"keys": ["super+shift+S"],
+	"keys": ["super+shift+s"],
 	"command": "paredit_split_sexp"
  }
 ,{
