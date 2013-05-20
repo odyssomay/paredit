@@ -5,6 +5,11 @@ for [sublime text](http://www.sublimetext.com/).
 
 The plugin is under development, but intended to be finished before 2013-05-25.
 
+## Installation
+
+To try the current implementation, clone the repository and place the resulting
+directory in `Installed Packages` inside your
+[data directory](http://docs.sublimetext.info/en/latest/basic_concepts.html#the-data-directory).
 
 ## Usage
 
@@ -35,12 +40,6 @@ These are not part of emacs paredit.
 * paredit-close-curly, same as *paredit-close-round* but with *}*.
 * paredit-kill-expression, same as *paredit-kill*, but removes the
 whole expression.
-
-## Installation
-
-To try the current implementation, clone the repository and place the resulting
-directory in `Installed Packages` inside your
-[data directory](http://docs.sublimetext.info/en/latest/basic_concepts.html#the-data-directory).
 
 ## Testing
 
