@@ -130,7 +130,7 @@ def paredit_newline(view, edit):
 		e = region.end()
 
 		if not s == e: view.erase(edit, region)
-		point = shared.remove_spaces(view, edit, s)
+		point = shared.remove_spaces(view, edit, s, False)
 		view.insert(edit, point, "\n")
 		return point + 1
 
