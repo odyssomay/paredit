@@ -1,7 +1,14 @@
 [
 ////
-//// Deleting & Killing
+//// Basic insertion
 {
+	"keys": ["alt+;"],
+	"command": "paredit_comment_dwim"
+ }
+
+////
+//// Deleting & Killing
+,{
 	"keys": ["super+delete"],
 	"command": "paredit_forward_kill_word"
  }

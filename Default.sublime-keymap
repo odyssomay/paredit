@@ -32,6 +32,10 @@
 	"command": "paredit_doublequote"
  }
 ,{
+	"keys": ["alt+;"],
+	"command": "paredit_comment_dwim"
+ }
+,{
 	"keys": ["ctrl+j"],
 	"command": "paredit_newline"
  }
