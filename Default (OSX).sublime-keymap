@@ -1,5 +1,16 @@
 [
 ////
+//// Deleting & Killing
+,{
+	"keys": ["super+delete"],
+	"command": "paredit_forward_kill_word"
+ }
+,{
+	"keys": ["super+backspace"],
+	"command": "paredit_backward_kill_word"
+ }
+
+////
 //// Movement & navigation
 {
 	"keys": ["ctrl+super+f"],
