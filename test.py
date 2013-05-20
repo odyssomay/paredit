@@ -98,6 +98,12 @@ def paredit_test_insertion(view, edit):
 		,	["|hello world|", "\"|hello world|\""]
 		])
 	run_tests(view, edit,
+		"paredit_comment_dwim",
+		[
+			["(foo |bar) ; baz", "(foo bar) ; |baz"]
+		,	["(foo |bar)", "(foo bar) ;|"]
+		])
+	run_tests(view, edit,
 		"paredit_newline",
 		[
 			["|", "\n|"]
