@@ -36,6 +36,10 @@
 	"command": "paredit_wrap_curly"
  }
 ,{
+	"keys": ["super+shift+'"],
+	"command": "paredit_meta_doublequote"
+ }
+,{
 	"keys": ["super+s"],
 	"command": "paredit_splice_sexp"
  }

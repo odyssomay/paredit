@@ -89,6 +89,10 @@
 	"command": "paredit_wrap_curly"
  }
 ,{
+	"keys": ["alt+shift+'"],
+	"command": "paredit_meta_doublequote"
+ }
+,{
 	"keys": ["alt+s"],
 	"command": "paredit_splice_sexp"
  }
