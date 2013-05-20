@@ -175,6 +175,18 @@ def get_previous_word(view, point):
 	return (0, word_end)
 
 ####
+#### Get character
+def get_next_character(view, point):
+	for (i, c) in walk_right(view, point):
+		if not c.isspace():
+			return (i, c)
+
+def get_previous_character(view, point):
+	for (i, c) in walk_left(view, point):
+		if not c.isspace():
+			return (i, c)
+
+####
 #### Misc
 def edit_selections(view, f):
 	new_regions = []
