@@ -263,7 +263,7 @@ def paredit_test_miscellaneous(view, edit):
 		"paredit_join_sexp",
 		[
 			["(hello)| (world)", "(hello| world)"]
-		,	["(foo \"Hello, \"| \"world!\")", "(foo \"Hello, world!\")"]
+		,	["(foo \"Hello, \"| \"world!\")", "(foo \"Hello, |world!\")"]
 		,	["hello-\n|  world", "hello-|world"]
 		])
 
