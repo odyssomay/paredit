@@ -97,6 +97,9 @@ def paredit_doublequote(view, edit):
 
 	shared.edit_selections(view, f)
 
+def paredit_comment_dwim(view, edit):
+	pass
+
 def paredit_newline(view, edit):
 	def f(region):
 		s = region.begin()
@@ -146,6 +149,11 @@ class Paredit_doublequoteCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if shared.should_paredit(self.view):
 			paredit_doublequote(self.view, edit)
+
+class Paredit_comment_dwimCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		if shared.should_paredit(self.view):
+			paredit_comment_dwim(self.view, edit)
 
 class Paredit_newlineCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
