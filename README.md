@@ -7,42 +7,20 @@ The plugin is under development, but intended to be finished before 2013-05-25.
 
 ## Implementation Status
 
-Below is a list of all currently implemented paredit commands.
+Below is a list of all currently **not** implemented paredit commands
+from the cheatsheet.
 
-Note: The actual name of the commands inside sublime text use 
-underscores instead of hyphens. E.g. *paredit-open-round* is
-called *paredit_open_round*.
+* paredit-close-round-and-newline
+* paredit-meta-doublequote
+* paredit-backslash
+* paredit-comment-dwim
 
-### Basic Insertion Commands
+* paredit-splice-sexp-killing-backward
+* paredit-splice-sexp-killing-forward
+* paredit-raise-sexp
 
-* paredit-open-round
-* paredit-close-round
-* paredit-open-square
-* paredit-close-square
-* paredit-doublequote
-* paredit-newline
-
-### Deleting & killing
-
-* paredit-forward-delete
-* paredit-backward-delete
-* paredit-kill
-* paredit-forward-kill-word
-* paredit-backward-kill-word
-
-### Movement & Navigation
-
-* paredit-forward
-* paredit-backward
-
-### Depth-Changing Commands
-
-* paredit-wrap-round
-* paredit-splice-sexp
-
-### Miscellaneous Commands
-
-* paredit-split-sexp
+* paredit-recentre-on-sexp
+* paredit-reindent-defun
 
 ### Extra commands
 
