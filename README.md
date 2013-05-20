@@ -22,7 +22,6 @@ from the cheatsheet.
 
 * paredit-close-round-and-newline
 * paredit-backslash
-* paredit-comment-dwim
 * paredit-splice-sexp-killing-backward
 * paredit-splice-sexp-killing-forward
 * paredit-raise-sexp
