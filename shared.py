@@ -180,11 +180,13 @@ def get_next_character(view, point):
 	for (i, c) in walk_right(view, point):
 		if not c.isspace():
 			return (i, c)
+	return (None, None)
 
 def get_previous_character(view, point):
 	for (i, c) in walk_left(view, point):
 		if not c.isspace():
 			return (i, c)
+	return (None, None)
 
 ####
 #### Misc
