@@ -97,8 +97,32 @@ def paredit_doublequote(view, edit):
 
 	shared.edit_selections(view, f)
 
+def add_comment(view, edit, line):
+	view.insert(edit, line.end(), " ;")
+	return line.end() + 2
+
 def paredit_comment_dwim(view, edit):
-	pass
+	def f(region):
+		if not region.a == region.b:
+			return region
+		point = region.a
+
+		line = view.line(point)
+		last_char_i = line.end() - 1
+		if not last_char_i >= 0:
+			return add_comment(view, edit, line)
+
+		comment_region = shared.is_inside_comment(view, last_char_i)
+		if not comment_region:
+			return add_comment(view, edit, line)
+
+		for (i, c) in shared.walk_right(view, comment_region.begin() + 1):
+			if not c == " ":
+				return i
+
+		return comment_region.begin() + 1
+
+	shared.edit_selections(view, f)
 
 def paredit_newline(view, edit):
 	def f(region):
