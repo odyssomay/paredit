@@ -8,9 +8,14 @@ def erase_region(view, edit, region):
 	view.erase(edit, region)
 	return region.begin()
 
-def remove_spaces(view, edit, point, erase_left=True, erase_right=True):
+def remove_spaces(view, edit, point, remove_newlines=True, erase_left=True, erase_right=True):
 	left_limit = None
 	right_limit = None
+
+	def isspace(c):
+		if remove_newlines:
+			return c.isspace()
+		return c == " "
 
 	if not erase_left:
 		left_limit = point
@@ -19,7 +24,7 @@ def remove_spaces(view, edit, point, erase_left=True, erase_right=True):
 		left_limit = point
 	else:
 		for (i, c) in walk_left(view, point - 1):
-			if not c.isspace():
+			if not isspace(c):
 				left_limit = i + 1
 				break
 
@@ -29,7 +34,7 @@ def remove_spaces(view, edit, point, erase_left=True, erase_right=True):
 		right_limit = point
 	else:
 		for (i, c) in walk_right(view, point):
-			if not c.isspace():
+			if not isspace(c):
 				right_limit = i
 				break
 
