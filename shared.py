@@ -8,21 +8,33 @@ def erase_region(view, edit, region):
 	view.erase(edit, region)
 	return region.begin()
 
-def remove_spaces(view, edit, point):
-	if is_inside_word(view.substr(point)):
-		return point
+def remove_spaces(view, edit, point, erase_left=True, erase_right=True):
+	left_limit = None
+	right_limit = None
 
-	for (i, c) in walk_left(view, point - 1):
-		if not c.isspace():
-			left_limit = i + 1
-			break
+	if not erase_left:
+		left_limit = point
+	elif (point - 1 >= 0 and
+	    is_inside_word(view.substr(point - 1))):
+		left_limit = point
+	else:
+		for (i, c) in walk_left(view, point - 1):
+			if not c.isspace():
+				left_limit = i + 1
+				break
 
-	for (i, c) in walk_right(view, point):
-		if not c.isspace():
-			right_limit = i
-			break
+	if not erase_right:
+		right_limit = point
+	elif is_inside_word(view.substr(point)):
+		right_limit = point
+	else:
+		for (i, c) in walk_right(view, point):
+			if not c.isspace():
+				right_limit = i
+				break
 
-	view.erase(edit, sublime.Region(left_limit, right_limit))
+	if left_limit and right_limit and left_limit != right_limit:
+		view.erase(edit, sublime.Region(left_limit, right_limit))
 	return left_limit
 
 ####
