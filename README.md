@@ -21,7 +21,6 @@ Below is a list of all currently **not** implemented paredit commands
 from the cheatsheet.
 
 * paredit-close-round-and-newline
-* paredit-meta-doublequote
 * paredit-backslash
 * paredit-comment-dwim
 * paredit-splice-sexp-killing-backward
