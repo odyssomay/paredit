@@ -20,7 +20,10 @@ def paredit_split_sexp(view, edit):
 		if lb and rb:
 			lc = view.substr(lb)
 			rc = view.substr(rb - 1)
-			spaces_start = shared.remove_spaces(view, edit, point)
+			if lc == "\"":
+				spaces_start = point
+			else:
+				spaces_start = shared.remove_spaces(view, edit, point)
 			return insert_split_brackets(view, edit, lc, rc, spaces_start)
 
 		return point
