@@ -5,6 +5,11 @@ for [sublime text](http://www.sublimetext.com/).
 
 The plugin is under development, but intended to be finished before 2013-05-25.
 
+
+## Usage
+
+See [the cheatsheet](http://pub.gajendra.net/src/paredit-refcard.pdf).
+
 ## Implementation Status
 
 Below is a list of all currently **not** implemented paredit commands
