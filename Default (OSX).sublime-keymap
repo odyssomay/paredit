@@ -46,10 +46,11 @@
 	"keys": ["super+shift+'"],
 	"command": "paredit_meta_doublequote"
  }
-,{
-	"keys": ["super+s"],
-	"command": "paredit_splice_sexp"
- }
+// Overrides osx save
+// ,{
+// 	"keys": ["super+s"],
+// 	"command": "paredit_splice_sexp"
+//  }
 
 ////
 //// Miscellaneous commands
