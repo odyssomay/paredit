@@ -1,0 +1,22 @@
+[
+{
+  "caption": "Preferences",
+  "mnemonic": "n",
+  "id": "preferences",
+  "children":
+  [
+    {
+      "caption": "Paredit",
+      "children": [
+        {"caption": "Enabled", "checkbox": true, "command": "paredit_toggle_enable"},
+        {"caption": "Settings", "command": "open_file", "args":
+          {"file": "${packages}/paredit/paredit.sublime-settings"}},
+        {"caption": "Key Bindings – Default", "command": "open_file", "args":
+          {"file": "${packages}/paredit/Default.sublime-keymap"}},
+        {"caption": "Key Bindings – OSX", "command": "open_file", "args":
+          {"file": "${packages}/paredit/Default (OSX).sublime-keymap"}}
+      ]
+    }
+  ]
+}
+]
