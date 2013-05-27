@@ -59,25 +59,20 @@ def paredit_splice_sexp(view, edit):
 #### Commands
 class Paredit_wrap_roundCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_wrap_round(self.view, edit)
+		paredit_wrap_round(self.view, edit)
 
 class Paredit_wrap_squareCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_wrap_square(self.view, edit)
+		paredit_wrap_square(self.view, edit)
 
 class Paredit_wrap_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_wrap_curly(self.view, edit)
+		paredit_wrap_curly(self.view, edit)
 
 class Paredit_meta_doublequoteCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_meta_doublequote(self.view, edit)
+		paredit_meta_doublequote(self.view, edit)
 
 class Paredit_splice_sexpCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_splice_sexp(self.view, edit)
+		paredit_splice_sexp(self.view, edit)

@@ -3,131 +3,159 @@
 //// Basic insertion
  {
 	"keys": ["("],
-	"command": "paredit_open_round"
+	"command": "paredit_open_round",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": [")"],
-	"command": "paredit_close_round"
+	"command": "paredit_close_round",
+	"context": [{"key": "should_paredit"}]
  }
 
 ,{
 	"keys": ["["],
-	"command": "paredit_open_square"
+	"command": "paredit_open_square",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["]"],
-	"command": "paredit_close_square"
+	"command": "paredit_close_square",
+	"context": [{"key": "should_paredit"}]
  }
 
 ,{
 	"keys": ["{"],
-	"command": "paredit_open_curly"
+	"command": "paredit_open_curly",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["}"],
-	"command": "paredit_close_curly"
+	"command": "paredit_close_curly",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["\""],
-	"command": "paredit_doublequote"
+	"command": "paredit_doublequote",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+;"],
-	"command": "paredit_comment_dwim"
+	"command": "paredit_comment_dwim",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+j"],
-	"command": "paredit_newline"
+	"command": "paredit_newline",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Deleting & killing
 ,{
 	"keys": ["delete"],
-	"command": "paredit_forward_delete"
+	"command": "paredit_forward_delete",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["backspace"],
-	"command": "paredit_backward_delete"
+	"command": "paredit_backward_delete",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+k"],
-	"command": "paredit_kill"
+	"command": "paredit_kill",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+shift+k"],
-	"command": "paredit_kill_expression"
+	"command": "paredit_kill_expression",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+delete"],
-	"command": "paredit_forward_kill_word"
+	"command": "paredit_forward_kill_word",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+backspace"],
-	"command": "paredit_backward_kill_word"
+	"command": "paredit_backward_kill_word",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Movement & navigation
 ,{
 	"keys": ["ctrl+alt+f"],
-	"command": "paredit_forward"
+	"command": "paredit_forward",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+alt+b"],
-	"command": "paredit_backward"
+	"command": "paredit_backward",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Depth-changing commands
 ,{
 	"keys": ["alt+shift+9"],
-	"command": "paredit_wrap_round"
+	"command": "paredit_wrap_round",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+["],
-	"command": "paredit_wrap_square"
+	"command": "paredit_wrap_square",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+shift+["],
-	"command": "paredit_wrap_curly"
+	"command": "paredit_wrap_curly",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+shift+'"],
-	"command": "paredit_meta_doublequote"
+	"command": "paredit_meta_doublequote",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+s"],
-	"command": "paredit_splice_sexp"
+	"command": "paredit_splice_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Bargafe & slurpage
 ,{
 	"keys": ["ctrl+shift+0"],
-	"command": "paredit_forward_slurp_sexp"
+	"command": "paredit_forward_slurp_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+shift+]"],
-	"command": "paredit_forward_barf_sexp"
+	"command": "paredit_forward_barf_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+shift+9"],
-	"command": "paredit_backward_slurp_sexp"
+	"command": "paredit_backward_slurp_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+shift+["],
-	"command": "paredit_backward_barf_sexp"
+	"command": "paredit_backward_barf_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Miscellaneous commands
 ,{
 	"keys": ["alt+shift+s"],
-	"command": "paredit_split_sexp"
+	"command": "paredit_split_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["alt+shift+j"],
-	"command": "paredit_join_sexp"
+	"command": "paredit_join_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ]

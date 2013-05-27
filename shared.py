@@ -51,7 +51,9 @@ def is_point_inside_regions(point, regions):
 
 def is_inside_string(view, point):
 	if view.score_selector(point, "string") > 0:
-		return view.extract_scope(point)
+		region = view.extract_scope(point)
+		if point != region.begin():
+			return region
 
 def is_inside_comment(view, point):
 	test_point = point
@@ -286,6 +288,11 @@ def should_paredit(view):
 	return (is_enabled() and
 	        (is_correct_syntax(view) or
 	         is_correct_file_ending(view)))
+
+class PareditListenerCommand(sublime_plugin.EventListener):
+	def on_query_context(self, view, key, operator, operand, match_all):
+		if key == "should_paredit":
+			return should_paredit(view)
 
 class Paredit_toggle_enableCommand(sublime_plugin.ApplicationCommand):
 	def run(self):

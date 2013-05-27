@@ -3,48 +3,57 @@
 //// Basic insertion
 {
 	"keys": ["alt+;"],
-	"command": "paredit_comment_dwim"
+	"command": "paredit_comment_dwim",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Deleting & Killing
 ,{
 	"keys": ["super+delete"],
-	"command": "paredit_forward_kill_word"
+	"command": "paredit_forward_kill_word",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["super+backspace"],
-	"command": "paredit_backward_kill_word"
+	"command": "paredit_backward_kill_word",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Movement & navigation
 ,{
 	"keys": ["ctrl+super+f"],
-	"command": "paredit_forward"
+	"command": "paredit_forward",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["ctrl+super+b"],
-	"command": "paredit_backward"
+	"command": "paredit_backward",
+	"context": [{"key": "should_paredit"}]
  }
 
 ////
 //// Depth-changing commands
 ,{
 	"keys": ["super+shift+9"],
-	"command": "paredit_wrap_round"
+	"command": "paredit_wrap_round",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["super+["],
-	"command": "paredit_wrap_square"
+	"command": "paredit_wrap_square",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["super+shift+["],
-	"command": "paredit_wrap_curly"
+	"command": "paredit_wrap_curly",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["super+shift+'"],
-	"command": "paredit_meta_doublequote"
+	"command": "paredit_meta_doublequote",
+	"context": [{"key": "should_paredit"}]
  }
 // Overrides osx save
 // ,{
@@ -56,10 +65,12 @@
 //// Miscellaneous commands
 ,{
 	"keys": ["super+shift+s"],
-	"command": "paredit_split_sexp"
+	"command": "paredit_split_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ,{
 	"keys": ["super+shift+j"],
-	"command": "paredit_join_sexp"
+	"command": "paredit_join_sexp",
+	"context": [{"key": "should_paredit"}]
  }
 ]

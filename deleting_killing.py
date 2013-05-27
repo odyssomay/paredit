@@ -139,30 +139,24 @@ def paredit_backward_kill_word(view, edit):
 #### Commands
 class Paredit_forward_deleteCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_forward_delete(self.view, edit)
+		paredit_forward_delete(self.view, edit)
 
 class Paredit_backward_deleteCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_backward_delete(self.view, edit)
+		paredit_backward_delete(self.view, edit)
 
 class Paredit_killCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_kill(self.view, edit)
+		paredit_kill(self.view, edit)
 
 class Paredit_kill_expressionCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_kill_expression(self.view, edit)
+		paredit_kill_expression(self.view, edit)
 
 class Paredit_forward_kill_wordCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_forward_kill_word(self.view, edit)
+		paredit_forward_kill_word(self.view, edit)
 
 class Paredit_backward_kill_wordCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_backward_kill_word(self.view, edit)
+		paredit_backward_kill_word(self.view, edit)

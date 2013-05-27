@@ -64,12 +64,10 @@ def paredit_backward(view, edit):
 
 class Paredit_forwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_forward(self.view, edit)
+		paredit_forward(self.view, edit)
 
 class Paredit_backwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		if shared.should_paredit(self.view):
-			paredit_backward(self.view, edit)
+		paredit_backward(self.view, edit)
 
 
