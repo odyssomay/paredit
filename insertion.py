@@ -76,11 +76,19 @@ def paredit_open_square(view, edit):
 def paredit_close_square(view, edit):
 	paredit_close(view, edit, "[", "]")
 
+def paredit_close_square_and_newline(view, edit):
+	view.run_command("paredit_close_square")
+	view.run_command("lispindentinsertnewline")
+
 def paredit_open_curly(view, edit):
 	paredit_open(view, edit, "{", "}")
 
 def paredit_close_curly(view, edit):
 	paredit_close(view, edit, "{", "}")
+
+def paredit_close_curly_and_newline(view, edit):
+	view.run_command("paredit_close_curly")
+	view.run_command("lispindentinsertnewline")
 
 def paredit_doublequote(view, edit):
 	def f(region):
@@ -141,6 +149,8 @@ def paredit_newline(view, edit):
 
 ####
 #### Commands
+
+## Parentheses
 class Paredit_open_roundCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_open_round(self.view, edit)
@@ -153,6 +163,7 @@ class Paredit_close_round_and_newlineCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_close_round_and_newline(self.view, edit)
 
+## Square brackets
 class Paredit_open_squareCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_open_square(self.view, edit)
@@ -161,6 +172,11 @@ class Paredit_close_squareCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_close_square(self.view, edit)
 
+class Paredit_close_square_and_newlineCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_close_square_and_newline(self.view, edit)
+
+## Curly brackets
 class Paredit_open_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_open_curly(self.view, edit)
@@ -169,6 +185,11 @@ class Paredit_close_curlyCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_close_curly(self.view, edit)
 
+class Paredit_close_curly_and_newlineCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_close_curly_and_newline(self.view, edit)
+
+## Misc
 class Paredit_doublequoteCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_doublequote(self.view, edit)
