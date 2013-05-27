@@ -66,6 +66,10 @@ def paredit_open_round(view, edit):
 def paredit_close_round(view, edit):
 	paredit_close(view, edit, "(", ")")
 
+def paredit_close_round_and_newline(view, edit):
+	view.run_command("paredit_close_round")
+	view.run_command("lispindentinsertnewline")
+
 def paredit_open_square(view, edit):
 	paredit_open(view, edit, "[", "]")
 
@@ -144,6 +148,10 @@ class Paredit_open_roundCommand(sublime_plugin.TextCommand):
 class Paredit_close_roundCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_close_round(self.view, edit)
+
+class Paredit_close_round_and_newlineCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_close_round_and_newline(self.view, edit)
 
 class Paredit_open_squareCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
