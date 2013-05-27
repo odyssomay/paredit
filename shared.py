@@ -264,18 +264,28 @@ def is_enabled():
 	return settings.get("enabled", True)
 
 def set_enabled(enabled):
+	init_settings()
 	settings.set("enabled", enabled)
 
+def check_regexes(regexes, string):
+	for regex in regexes:
+		if re.search(regex, string):
+			return True
+
 def is_correct_syntax(view):
-	return False
+	init_settings()
+	syntax_regexes = settings.get("syntax", ["."])
+	return check_regexes(syntax_regexes, view.settings().get("syntax"))
 
 def is_correct_file_ending(view):
-	return False
+	init_settings()
+	file_ending_regexes = settings.get("file_endings", ["."])
+	return check_regexes(file_ending_regexes, view.file_name())
 
 def should_paredit(view):
-	return (is_enabled() or
-	        is_correct_syntax(view) or
-	        is_correct_file_ending(view))
+	return (is_enabled() and
+	        (is_correct_syntax(view) or
+	         is_correct_file_ending(view)))
 
 class Paredit_toggle_enableCommand(sublime_plugin.ApplicationCommand):
 	def run(self):
