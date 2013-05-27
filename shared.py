@@ -117,7 +117,7 @@ def max_with_none(*args):
 
 	return out
 
-def get_expression(view, point):
+def get_expression(view, point, direction="forward"):
 	string_region = is_inside_string(view, point)
 	if string_region: return (string_region.begin(), string_region.end())
 
@@ -127,12 +127,22 @@ def get_expression(view, point):
 
 	m = max_with_none(lparen, lbrack, lcurly)
 
-	if   m == lparen: return paren
-	elif m == lbrack: return brack
-	elif m == lcurly: return curly
-	else: return (None, None)
+	out = None
+	if   m == lparen: out = paren
+	elif m == lbrack: out = brack
+	elif m == lcurly: out = curly
+	
+	if out:
+		if direction == "backward":
+			return tuple(reversed(out))
+		return out
 
-def get_next_expression(view, point, skip_endbrackets=False):
+	return (None, None)
+
+def get_next_expression(view, point, skip_endbrackets=False, direction="forward"):
+	if direction == "backward":
+		return tuple(reversed(get_previous_expression(view, point, skip_endbrackets)))
+
 	for (i, c) in walk_right(view, point):
 		if not c.isspace():
 			if is_inside_word(c):
@@ -230,6 +240,25 @@ def char_type(c):
 	if c == "\"": return "string"
 	elif c == "(" or c == "[" or c == "{": return "lbracket"
 	elif c == ")" or c == "]" or c == "}": return "rbracket"
+
+def step(i, steps, direction):
+	if direction == "forward":
+		return i + steps
+	elif direction == "backward":
+		return i - steps
+	else:
+		raise Exception("direction must be one of \"forward\" or \"backward\"")
+
+def get_char(view, i, direction):
+	if direction == "backward":
+		i -= 1
+	return view.substr(i)
+
+def insert(view, edit, i, text, direction):
+	if direction == "backward":
+		i -= 1
+
+	return view.insert(edit, i, text)
 
 ####
 #### Walking
