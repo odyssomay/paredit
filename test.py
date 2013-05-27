@@ -84,6 +84,11 @@ def paredit_test_insertion(view, edit):
 		,	["(def |a 3    )", "(def a 3)|"]
 		])
 	run_tests(view, edit,
+		"paredit_close_round_and_newline",
+		[
+			["(defn f (x|   ))", "(defn f (x)\n  |)"]
+		])
+	run_tests(view, edit,
 		"paredit_open_square",
 		[
 			["|", "[|]"]
