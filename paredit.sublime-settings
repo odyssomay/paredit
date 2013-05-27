@@ -1,0 +1,5 @@
+{
+	"enabled": true,
+	"syntax": ["Clojure"],
+	"file_endings": ["clj", "cljs"]
+}

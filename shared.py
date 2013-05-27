@@ -1,5 +1,5 @@
 
-import sublime
+import sublime, sublime_plugin
 import re
 
 ####
@@ -249,5 +249,41 @@ def walk_right(view, point):
 
 ####
 #### Configuration
+settings = None
+
+def reload_settings():
+	pass
+
+settings_has_init = False
+def init_settings():
+	global settings_has_init
+	global settings
+	if not settings_has_init:
+		settings = sublime.load_settings("paredit.sublime-settings")
+		#settings.add_on_change("languages",)
+		settings_has_init = True
+
+def is_enabled():
+	init_settings()
+	return settings.get("enabled", True)
+
+def set_enabled(enabled):
+	settings.set("enabled", enabled)
+
+def is_correct_syntax(view):
+	return False
+
+def is_correct_file_ending(view):
+	return False
+
 def should_paredit(view):
-	return True
+	return (is_enabled() or
+	        is_correct_syntax(view) or
+	        is_correct_file_ending(view))
+
+class Paredit_toggle_enableCommand(sublime_plugin.ApplicationCommand):
+	def run(self):
+		set_enabled(not is_enabled())
+
+	def is_checked(self):
+		return is_enabled()
