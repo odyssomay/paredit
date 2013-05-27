@@ -1,5 +1,5 @@
 {
 	"enabled": true,
-	"syntax": ["Clojure"],
-	"file_endings": ["clj", "cljs"]
+	"syntax": ["."],
+	"file_endings": ["."]
 }
