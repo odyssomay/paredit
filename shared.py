@@ -251,16 +251,12 @@ def walk_right(view, point):
 #### Configuration
 settings = None
 
-def reload_settings():
-	pass
-
 settings_has_init = False
 def init_settings():
 	global settings_has_init
 	global settings
 	if not settings_has_init:
 		settings = sublime.load_settings("paredit.sublime-settings")
-		#settings.add_on_change("languages",)
 		settings_has_init = True
 
 def is_enabled():
