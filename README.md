@@ -26,15 +26,6 @@ from the cheatsheet.
 * paredit-recentre-on-sexp
 * paredit-reindent-defun
 
-### Extra commands
-
-These are not part of emacs paredit.
-
-* paredit-open-curly, same as *paredit-open-round* but with *{*.
-* paredit-close-curly, same as *paredit-close-round* but with *}*.
-* paredit-kill-expression, same as *paredit-kill*, but removes the
-whole expression.
-
 ## Testing
 
 Press *ctrl+shift+p* to open the command palette. Type *test*
