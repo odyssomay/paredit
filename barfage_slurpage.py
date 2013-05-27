@@ -5,82 +5,63 @@ try:
 except:
 	import shared
 
-def paredit_forward_slurp_sexp(view, edit):
+####
+#### Slurping
+def paredit_slurp_sexp(view, edit, direction):
 	def f(region):
 		if not region.a == region.b:
 			return region
 		point = region.a
 
-		(l_exp, r_exp) = shared.get_expression(view, point)
+		(a_exp, b_exp) = shared.get_expression(view, point, direction)
 
-		if l_exp and r_exp:
-			(lnext_exp, rnext_exp) = shared.get_next_expression(view, r_exp, True)
-			if lnext_exp and rnext_exp:
-				rbracket = view.substr(r_exp - 1)
-				view.erase(edit, sublime.Region(r_exp - 1, r_exp))
-				view.insert(edit, rnext_exp - 1, rbracket)
+		if a_exp and b_exp:
+			(anext_exp, bnext_exp) = shared.get_next_expression(view, b_exp, True, direction)
+			if anext_exp and bnext_exp:
+				end_bracket = shared.get_char(view, shared.step(b_exp, -1, direction), direction)
+				view.erase(edit, sublime.Region(shared.step(b_exp, -1, direction), b_exp))
+				shared.insert(view, edit, shared.step(bnext_exp, -1, direction), end_bracket, direction)
+
+		return point
+
+	shared.edit_selections(view, f)
+
+def paredit_forward_slurp_sexp(view, edit):
+	paredit_slurp_sexp(view, edit, "forward")
+
+def paredit_backward_slurp_sexp(view, edit):
+	paredit_slurp_sexp(view, edit, "backward")
+
+####
+#### Barfing
+def paredit_barf_sexp(view, edit, direction):
+	def f(region):
+		if not region.a == region.b:
+			return region
+		point = region.a
+
+		(a_exp, b_exp) = shared.get_expression(view, point, direction)
+
+		if a_exp and b_exp:
+			(anext_exp, bnext_exp) = shared.get_next_expression(view, point, True, direction)
+			if anext_exp and bnext_exp:
+				end_bracket = shared.get_char(view, shared.step(b_exp, -1, direction), direction)
+
+				view.erase(edit, sublime.Region(shared.step(b_exp, -1, direction), b_exp))
+				shared.insert(view, edit, bnext_exp, end_bracket, direction)
 
 		return point
 
 	shared.edit_selections(view, f)
 
 def paredit_forward_barf_sexp(view, edit):
-	def f(region):
-		if not region.a == region.b:
-			return region
-		point = region.a
-
-		(l_exp, r_exp) = shared.get_expression(view, point)
-
-		if l_exp and r_exp:
-			(lnext_exp, rnext_exp) = shared.get_next_expression(view, point, True)
-			if lnext_exp and rnext_exp:
-				rbracket = view.substr(r_exp - 1)
-				view.erase(edit, sublime.Region(r_exp - 1, r_exp))
-				view.insert(edit, rnext_exp, rbracket)
-
-		return point
-
-	shared.edit_selections(view, f)
-
-def paredit_backward_slurp_sexp(view, edit):
-	def f(region):
-		if not region.a == region.b:
-			return region
-		point = region.a
-
-		(l_exp, r_exp) = shared.get_expression(view, point)
-
-		if l_exp and r_exp:
-			(lnext_exp, rnext_exp) = shared.get_previous_expression(view, l_exp, True)
-			if lnext_exp and rnext_exp:
-				rbracket = view.substr(l_exp)
-				view.erase(edit, sublime.Region(l_exp, l_exp + 1))
-				view.insert(edit, lnext_exp, rbracket)
-
-		return point
-
-	shared.edit_selections(view, f)
+	paredit_barf_sexp(view, edit, "forward")
 
 def paredit_backward_barf_sexp(view, edit):
-	def f(region):
-		if not region.a == region.b:
-			return region
-		point = region.a
+	paredit_barf_sexp(view, edit, "backward")
 
-		(l_exp, r_exp) = shared.get_expression(view, point)
-
-		if l_exp and r_exp:
-			(lnext_exp, rnext_exp) = shared.get_previous_expression(view, point, True)
-			if lnext_exp and rnext_exp:
-				rbracket = view.substr(l_exp)
-				view.erase(edit, sublime.Region(l_exp, l_exp + 1))
-				view.insert(edit, lnext_exp - 1, rbracket)
-
-		return point
-
-	shared.edit_selections(view, f)
-
+####
+#### Commands
 class Paredit_forward_slurp_sexpCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_forward_slurp_sexp(self.view, edit)
