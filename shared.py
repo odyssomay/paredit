@@ -51,9 +51,7 @@ def is_point_inside_regions(point, regions):
 
 def is_inside_string(view, point):
 	if view.score_selector(point, "string") > 0:
-		region = view.extract_scope(point)
-		if point != region.begin():
-			return region
+		return is_point_inside_regions(point, view.find_by_selector("string"))
 
 def is_inside_comment(view, point):
 	test_point = point
@@ -61,7 +59,7 @@ def is_inside_comment(view, point):
 	    view.substr(point - 1) != "\n"):
 		test_point = point - 1
 	if view.score_selector(test_point, "comment") > 0:
-		return view.extract_scope(test_point)
+		return is_point_inside_regions(point, view.find_by_selector("comment"))
 
 whitespace_matcher = re.compile("\s*$")
 def is_expression_empty(string):
