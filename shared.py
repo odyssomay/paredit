@@ -119,7 +119,11 @@ def max_with_none(*args):
 
 def get_expression(view, point, direction="forward"):
 	string_region = is_inside_string(view, point)
-	if string_region: return (string_region.begin(), string_region.end())
+	if string_region:
+		if direction == "forward":
+			return (string_region.begin(), string_region.end())
+		else:
+			return (string_region.end(), string_region.begin())
 
 	paren = (lparen, rparen) = find_enclosing_brackets(view, point, "(", ")")
 	brack = (lbrack, rbrack) = find_enclosing_brackets(view, point, "[", "]")
