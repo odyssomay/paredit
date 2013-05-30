@@ -153,6 +153,8 @@ def get_next_expression(view, point, skip_endbrackets=False, direction="forward"
 			elif (not skip_endbrackets) and t == "rbracket":
 				return (None, None)
 
+	return (None, None)
+
 def get_previous_expression(view, point, skip_endbrackets=False):
 	for (i, c) in walk_left(view, point):
 		if not c.isspace():
