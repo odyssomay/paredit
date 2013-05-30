@@ -5,7 +5,7 @@ try:
 except:
 	import shared
 
-def paredit_forward(view, edit):
+def paredit_move(view, edit, direction):
 	def f(region):
 		if not region.a == region.b:
 			return region
@@ -13,54 +13,43 @@ def paredit_forward(view, edit):
 		point = region.a
 
 		if shared.is_inside_string(view, point):
-			(lb, rb) = shared.get_expression(view, point)
-			target_point = rb - 1
+			(a, b) = shared.get_expression(view, point, direction)
+			target_point = shared.step(b, -1, direction)
 			if point == target_point:
-				return point + 1
-			return rb - 1
+				return shared.step(point, 1, direction)
+			return shared.step(b, -1, direction)
 
-		(word_start, word_end) = shared.get_word(view, point)
-		if word_start and word_end:
-			return word_end
+		if direction == "backward":
+			point -= 1
 
-		(next_left, next_right) = shared.get_next_expression(view, point)
-		if next_right:
-			return next_right
+		(word_a, word_b) = shared.get_word(view, point, direction)
+		if word_b:
+			return word_b
+
+		(next_a, next_b) = shared.get_next_expression(view, point, False, direction)
+		if next_b:
+			return next_b
+
+		expr_point = point
+		if direction == "backward":
+			expr_point += 1
+
+		(a, b) = shared.get_expression(view, expr_point, direction)
+		if b:
+			return b
+
+		if direction == "forward":
+			return shared.step(point, 1, direction)
 		else:
-			(lb, rb) = shared.get_expression(view, point)
-			if rb: return rb
-			return point + 1
+			return point
 
 	shared.edit_selections(view, f)
+
+def paredit_forward(view, edit):
+	paredit_move(view, edit, "forward")
 
 def paredit_backward(view, edit):
-	def f(region):
-		if not region.a == region.b:
-			return region
-
-		point = region.a
-
-		if shared.is_inside_string(view, point):
-			(lb, rb) = shared.get_expression(view, point)
-			target_point = lb + 1
-			if point == target_point:
-				point - 1
-			return lb + 1
-
-		(word_start, word_end) = shared.get_word(view, point - 1)
-
-		if word_start and word_end:
-			return word_start
-
-		(prev_left, prev_right) = shared.get_previous_expression(view, point - 1)
-		if prev_left:
-			return prev_left
-		else:
-			(lb, rb) = shared.get_expression(view, point)
-			if lb: return lb
-			return point - 1
-
-	shared.edit_selections(view, f)
+	paredit_move(view, edit, "backward")
 
 class Paredit_forwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
@@ -69,5 +58,3 @@ class Paredit_forwardCommand(sublime_plugin.TextCommand):
 class Paredit_backwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_backward(self.view, edit)
-
-
