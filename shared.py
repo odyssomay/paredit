@@ -170,6 +170,8 @@ def get_previous_expression(view, point, skip_endbrackets=False):
 			elif (not skip_endbrackets) and t == "lbracket":
 				return (None, None)
 
+	return (None, None)
+
 def get_word(view, point, direction="forward"):
 	word_left = None
 	word_right = None
