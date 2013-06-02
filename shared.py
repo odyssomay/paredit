@@ -319,6 +319,10 @@ def init_settings():
 		settings = sublime.load_settings("paredit.sublime-settings")
 		settings_has_init = True
 
+def is_strict_mode():
+	init_settings()
+	return settings.get("strict_mode", True)
+
 def is_enabled():
 	init_settings()
 	return settings.get("enabled", True)
