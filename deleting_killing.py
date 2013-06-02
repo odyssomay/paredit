@@ -25,7 +25,7 @@ def strict_delete_selection(view, edit, region):
 	while point < region.end():
 		(a, b) = shared.get_next_expression(view, point, True)
 		if a and b:
-			if b > region.end() or a <= region.begin():
+			if b > region.end() or a < region.begin():
 				break
 			view.replace(edit, sublime.Region(a, b), replace_char * (b - a))
 			point = b
