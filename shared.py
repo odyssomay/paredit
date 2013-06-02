@@ -215,6 +215,15 @@ def get_previous_word(view, point):
 
 	return (0, word_end)
 
+def bracket_count(text, left_bracket, right_bracket):
+	count = 0
+	for c in text:
+		if c == left_bracket:
+			count += 1
+		elif c == right_bracket:
+			count -= 1
+	return count
+
 ####
 #### Get character
 def get_next_character(view, point):
