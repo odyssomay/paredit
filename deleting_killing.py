@@ -5,11 +5,6 @@ try:
 except:
 	import shared
 
-def char_type(c):
-	if c == "\"": return "string"
-	elif c == "(" or c == "[" or c == "{": return "lbracket"
-	elif c == ")" or c == "]" or c == "}": return "rbracket"
-
 def remove_empty_expression(view, edit, point, fail_direction):
 	(lb, rb) = shared.get_expression(view, point)
 	if lb and rb:
@@ -46,7 +41,7 @@ def paredit_delete(view, edit, is_forward):
 			next_char = view.substr(point - 1)
 			skip_char_type = "rbracket"
 
-		next_char_type = char_type(next_char)
+		next_char_type = shared.char_type(next_char)
 
 		if shared.is_inside_comment(view, point):
 			pass # pass to else below
