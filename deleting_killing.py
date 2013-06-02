@@ -10,24 +10,17 @@ def strict_delete_selection(view, edit, region):
 
 	point = region.begin()
 	while point < region.end():
-		(a, b) = shared.get_next_word(view, point)
-		if a and b:
-			a = max(a, region.begin())
-			b = min(b, region.end())
-			if a > region.end():
-				break
-			view.replace(edit, sublime.Region(a, b), replace_char * (b - a))
-			point = b
-		else:
-			break
-
-	point = region.begin()
-	while point < region.end():
 		(a, b) = shared.get_next_expression(view, point, True)
 		if a and b:
-			if b > region.end() or a < region.begin():
+			if shared.is_inside_word(view.substr(a)):
+				if a > region.end():
+					break
+				a = max(a, region.begin())
+				b = min(b, region.end())
+			if b > region.end():
 				break
-			view.replace(edit, sublime.Region(a, b), replace_char * (b - a))
+			if not a < region.begin():
+				view.replace(edit, sublime.Region(a, b), replace_char * (b - a))
 			point = b
 		else:
 			break
