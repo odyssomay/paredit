@@ -6,7 +6,7 @@ except:
 	import shared
 
 def strict_delete_selection(view, edit, region):
-	replace_char = " "
+	replace_char = str(chr(1))
 
 	point = region.begin()
 	while point < region.end():
