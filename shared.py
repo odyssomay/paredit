@@ -268,6 +268,12 @@ def insert(view, edit, i, text, direction):
 
 	return view.insert(edit, i, text)
 
+def opposite_direction(direction):
+	if direction == "forward":
+		return "backward"
+	if direction == "backward":
+		return "forward"
+
 ####
 #### Walking
 def walk_left(view, point):
