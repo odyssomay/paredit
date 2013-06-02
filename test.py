@@ -133,6 +133,8 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(hello|)", "(hello)|"]
 		,	["; |(", "; |"]
 
+		,	["|()|", "|"]
+		,	["|[][]|", "|"]
 		,	["(fo|o (bar)| baz)", "(fo| baz)"]
 		,	["(fo|o (bar|) baz)", "(fo| (bar) baz)"]
 		,	["(defn f1 [coll f |x]| (conj (map f coll) x))",
