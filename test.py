@@ -251,6 +251,12 @@ def paredit_test_barfage_slurpage(view, edit):
 		"paredit_forward_barf_sexp",
 		[
 			["(foo (bar |baz quux) zot)", "(foo (bar |baz) quux zot)"]
+		,	["(defn f1 [coll f x] (conj (m|ap f coll x)))",
+			 "(defn f1 [coll f x] (conj (map f coll) x))"]
+		,	["(defn f1 [coll f x] (conj (m|ap f coll) x))",
+			 "(defn f1 [coll f x] (conj (map f) coll x))"]
+		,	["(defn f1 [coll f x] (conj (m|ap f) coll x))",
+			 "(defn f1 [coll f x] (conj (map) f coll x))"]
 		])
 	run_tests(view, edit,
 		"paredit_backward_slurp_sexp",
