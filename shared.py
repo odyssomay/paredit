@@ -292,6 +292,12 @@ def walk_right(view, point):
 		yield (i, c)
 		i += 1
 
+def walk(view, point, direction):
+	if direction == "forward":
+		return walk_right(view, point)
+	elif direction == "backward":
+		return walk_left(view, point)
+
 ####
 #### Configuration
 settings = None
