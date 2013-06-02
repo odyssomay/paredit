@@ -10,6 +10,13 @@ def paredit_open(view, edit, left_bracket, right_bracket):
 		begin = region.begin()
 		end = region.end()
 
+		if shared.is_strict_mode():
+			text = view.substr(region)
+			if not (shared.bracket_count(text, "(", ")") == 0 and
+			        shared.bracket_count(text, "[", "]") == 0 and
+			        shared.bracket_count(text, "{", "}") == 0):
+				return region
+
 		view.insert(edit, begin, left_bracket)
 
 		if not (begin == end and
