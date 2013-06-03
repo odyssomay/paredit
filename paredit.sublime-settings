@@ -1,5 +1,6 @@
 {
 	"enabled": true,
+	"strict_mode": true,
 	"syntax": ["."],
 	"file_name": ["."]
 }
