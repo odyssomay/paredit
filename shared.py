@@ -345,7 +345,7 @@ def is_correct_syntax(view):
 
 def is_correct_file_ending(view):
 	init_settings()
-	file_ending_regexes = settings.get("file_endings", ["."])
+	file_ending_regexes = settings.get("file_name", ["."])
 	return check_regexes(file_ending_regexes, view.file_name())
 
 def should_paredit(view):

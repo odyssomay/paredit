@@ -1,5 +1,5 @@
 {
 	"enabled": true,
 	"syntax": ["."],
-	"file_endings": ["."]
+	"file_name": ["."]
 }
