@@ -41,12 +41,12 @@
 	"context": [{"key": "should_paredit"}]
  }
 ,{
-	"keys": ["super+["],
+	"keys": ["ctrl+super+["],
 	"command": "paredit_wrap_square",
 	"context": [{"key": "should_paredit"}]
  }
 ,{
-	"keys": ["super+shift+["],
+	"keys": ["ctrl+super+shift+["],
 	"command": "paredit_wrap_curly",
 	"context": [{"key": "should_paredit"}]
  }
