@@ -133,7 +133,7 @@ def get_expression(view, point, direction="forward"):
 	if   m == lparen: out = paren
 	elif m == lbrack: out = brack
 	elif m == lcurly: out = curly
-	
+
 	if out:
 		if direction == "backward":
 			return tuple(reversed(out))
@@ -285,12 +285,12 @@ def opposite_direction(direction):
 	if direction == "backward":
 		return "forward"
 
-def truthy(v):
-	return (v is not False) or (v is not None)
+def truthy(*vals):
+	for val in vals:
+		if (val is False) or (val is None):
+			return False
 
-def is_tuple_region(t):
-	(a, b) = t
-	return truthy(a) and truthy(b)
+	return True
 
 ####
 #### Walking
