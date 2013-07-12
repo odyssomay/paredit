@@ -10,9 +10,14 @@ def strict_delete_selection(view, edit, region):
 
 	offset = region.begin()
 	out = list(view.substr(region))
-	print("out =", out)
 	point = region.begin()
 	while point < region.end():
+		if (shared.is_inside_comment(view, point) or
+		    shared.is_inside_string(view, point)):
+			out[point - offset] = replace_char
+			point += 1
+			continue
+
 		(a, b) = shared.get_next_expression(view, point, True)
 		if shared.truthy(a, b):
 			if shared.is_inside_word(view.substr(a)):
@@ -33,7 +38,7 @@ def strict_delete_selection(view, edit, region):
 	out = "".join(out)
 	out = out.replace(replace_char, "").strip()
 	view.replace(edit, region, out)
-	
+
 	return region.begin()
 
 def remove_empty_expression(view, edit, point, fail_direction):
