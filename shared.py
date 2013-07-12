@@ -285,6 +285,9 @@ def opposite_direction(direction):
 	if direction == "backward":
 		return "forward"
 
+def truthy(v):
+	return (v is not False) or (v is not None)
+
 ####
 #### Walking
 def walk_left(view, point):
