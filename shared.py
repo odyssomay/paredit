@@ -288,6 +288,10 @@ def opposite_direction(direction):
 def truthy(v):
 	return (v is not False) or (v is not None)
 
+def is_tuple_region(t):
+	(a, b) = t
+	return truthy(a) and truthy(b)
+
 ####
 #### Walking
 def walk_left(view, point):
