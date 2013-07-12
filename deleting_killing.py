@@ -8,6 +8,9 @@ except:
 def strict_delete_selection(view, edit, region):
 	replace_char = str(chr(1))
 
+	offset = region.begin()
+	out = list(view.substr(region))
+	print("out =", out)
 	point = region.begin()
 	while point < region.end():
 		(a, b) = shared.get_next_expression(view, point, True)
@@ -20,13 +23,17 @@ def strict_delete_selection(view, edit, region):
 			if b > region.end():
 				break
 			if not a < region.begin():
-				view.replace(edit, sublime.Region(a, b), replace_char * (b - a))
+				a_local = a - offset
+				b_local = b - offset
+				out[a_local:b_local] = list(replace_char * (b - a))
 			point = b
 		else:
 			break
 
-	view.replace(edit, region, view.substr(region).replace(replace_char, "").strip())
-
+	out = "".join(out)
+	out = out.replace(replace_char, "").strip()
+	view.replace(edit, region, out)
+	
 	return region.begin()
 
 def remove_empty_expression(view, edit, point, fail_direction):
