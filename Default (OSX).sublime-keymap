@@ -22,14 +22,11 @@
 
 ////
 //// Movement & navigation
-//
-// Overrides OS X fullscreen, and is already available on
-// in OS X via ctrl+option+f
-// ,{
-// 	"keys": ["ctrl+super+f"],
-//	"command": "paredit_forward",
-//	"context": [{"key": "should_paredit"}]
-//  }
+,{
+	"keys": ["ctrl+super+f"],
+	"command": "paredit_forward",
+	"context": [{"key": "should_paredit"}]
+ }
 ,{
 	"keys": ["ctrl+super+b"],
 	"command": "paredit_backward",
