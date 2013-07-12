@@ -175,6 +175,7 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(foo \"bar |baz\" quux)", "(foo \"bar |\" quux)"]
 		,	["[1 2| 3]", "[1 2|]"]
 		,	["{:a |3 :b 4}", "{:a |}"]
+		,	["(foo)| ; Bar", "(foo)|"]
 		])
 	run_tests(view, edit,
 		"paredit_kill_expression",
@@ -184,6 +185,7 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(foo \"bar |baz\" quux)", "(foo \"|\" quux)"]
 		,	["[1 2| 3]", "[|]"]
 		,	["{:a |3 :b 4}", "{|}"]
+		,	["(foo)| ; Bar", "|"]
 		])
 	run_tests(view, edit,
 		"paredit_forward_kill_word",
