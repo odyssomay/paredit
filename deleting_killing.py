@@ -31,6 +31,7 @@ def strict_delete_selection(view, edit, region):
 
 def remove_empty_expression(view, edit, point, fail_direction):
 	(lb, rb) = shared.get_expression(view, point)
+	
 	if lb and rb:
 		expr_region = sublime.Region(lb, rb)
 		expression = view.substr(expr_region)
