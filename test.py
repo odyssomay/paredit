@@ -139,6 +139,7 @@ def paredit_test_deleting_killing(view, edit):
 		,	["(fo|o (bar|) baz)", "(fo| (bar) baz)"]
 		,	["(defn f1 [coll f |x]| (conj (map f coll) x))",
 			 "(defn f1 [coll f |] (conj (map f coll) x))"]
+		,	["|(def a 3) ; (|", "|"]
 		])
 	run_tests(view, edit,
 		"paredit_backward_delete",
