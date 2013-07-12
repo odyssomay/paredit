@@ -128,7 +128,11 @@ def paredit_kill_abstract(view, edit, expression):
 				view.erase(edit, sublime.Region(point, rb - 1))
 				return point
 		else:
-			return point
+			line_region = view.line(point)
+			a = line_region.begin()
+			if not expression:
+				a = point
+			return shared.erase_region(view, edit, sublime.Region(a, line_region.end()))
 
 	shared.edit_selections(view, f)
 
