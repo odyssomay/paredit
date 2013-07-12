@@ -1,6 +1,6 @@
 
 import sublime, sublime_plugin
-import re
+import os, re
 
 ####
 #### Removing
@@ -313,11 +313,17 @@ def walk(view, point, direction):
 #### Configuration
 settings = None
 
+def create_missing_paredit_dir():
+	p = os.path.join(sublime.packages_path(), "paredit")
+	if not os.path.isdir(p):
+		os.makedirs(p)
+
 settings_has_init = False
 def init_settings():
 	global settings_has_init
 	global settings
 	if not settings_has_init:
+		create_missing_paredit_dir()
 		settings = sublime.load_settings("paredit.sublime-settings")
 		settings_has_init = True
 
