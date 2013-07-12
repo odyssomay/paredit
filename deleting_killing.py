@@ -117,7 +117,11 @@ def paredit_kill_abstract(view, edit, expression):
 
 		(lb, rb) = shared.get_expression(view, point)
 		if shared.truthy(lb, rb):
-			if expression:
+			region = sublime.Region(lb, rb)
+			if shared.is_expression_empty(view.substr(region)):
+				shared.erase_region(view, edit, region)
+				return lb
+			elif expression:
 				view.erase(edit, sublime.Region(lb + 1, rb - 1))
 				return lb + 1
 			else:
