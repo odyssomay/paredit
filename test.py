@@ -168,6 +168,8 @@ def paredit_test_deleting_killing(view, edit):
 		"paredit_kill",
 		[
 			["(|foo bar)", "(|)"]
+		,	["(|)", "|"]
+		,	["(  | )", "|"]
 		,	["(foo |bar)", "(foo |)"]
 		,	["(foo \"|bar baz\" quux)", "(foo \"|\" quux)"]
 		,	["(foo \"bar |baz\" quux)", "(foo \"bar |\" quux)"]
