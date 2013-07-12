@@ -40,16 +40,17 @@
 	"command": "paredit_wrap_round",
 	"context": [{"key": "should_paredit"}]
  }
-,{
-	"keys": ["alt+["],
-	"command": "paredit_wrap_square",
-	"context": [{"key": "should_paredit"}]
- }
-,{
-	"keys": ["alt+shift+["],
-	"command": "paredit_wrap_curly",
-	"context": [{"key": "should_paredit"}]
- }
+// Overrides default osx shortcuts
+// ,{
+// 	"keys": ["super+["],
+// 	"command": "paredit_wrap_square",
+// 	"context": [{"key": "should_paredit"}]
+//  }
+// ,{
+// 	"keys": ["super+shift+["],
+// 	"command": "paredit_wrap_curly",
+// 	"context": [{"key": "should_paredit"}]
+//  }
 ,{
 	"keys": ["super+shift+'"],
 	"command": "paredit_meta_doublequote",
