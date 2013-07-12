@@ -18,7 +18,7 @@ def paredit_wrap(view, edit, lbracket, rbracket):
 		point = region.a
 
 		(lb, rb) = shared.get_next_expression(view, point)
-		if lb and rb:
+		if shared.truthy(lb, rb):
 			return insert_brackets(view, edit, lbracket, rbracket,
 				sublime.Region(lb, rb))
 
@@ -46,7 +46,7 @@ def paredit_splice_sexp(view, edit):
 		point = region.a
 
 		(lb, rb) = shared.get_expression(view, point)
-		if lb and rb:
+		if shared.truthy(lb, rb):
 			view.erase(edit, sublime.Region(rb - 1, rb))
 			view.erase(edit, sublime.Region(lb, lb + 1))
 			return point - 1

@@ -17,7 +17,7 @@ def paredit_split_sexp(view, edit):
 
 		(lb, rb) = shared.get_expression(view, point)
 
-		if lb and rb:
+		if shared.truthy(lb, rb):
 			lc = view.substr(lb)
 			rc = view.substr(rb - 1)
 			if lc == "\"":

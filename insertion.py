@@ -60,7 +60,7 @@ def paredit_close(view, edit, left_bracket, right_bracket):
 		(lb, rb) = shared.find_enclosing_brackets(
 			view, region.begin(), left_bracket, right_bracket)
 
-		if rb:
+		if shared.truthy(rb):
 			return paredit_close_remove_spaces(view, edit, rb)
 		else:
 			return region

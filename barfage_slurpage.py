@@ -15,9 +15,9 @@ def paredit_slurp_sexp(view, edit, direction):
 
 		(a_exp, b_exp) = shared.get_expression(view, point, direction)
 
-		if a_exp and b_exp:
+		if shared.truthy(a_exp, b_exp):
 			(anext_exp, bnext_exp) = shared.get_next_expression(view, b_exp, True, direction)
-			if anext_exp and bnext_exp:
+			if shared.truthy(anext_exp, bnext_exp):
 				end_bracket = shared.get_char(view, shared.step(b_exp, -1, direction), direction)
 				view.erase(edit, sublime.Region(shared.step(b_exp, -1, direction), b_exp))
 				shared.insert(view, edit, shared.step(bnext_exp, -1, direction), end_bracket, direction)
@@ -42,10 +42,10 @@ def paredit_barf_sexp(view, edit, direction):
 
 		(a_exp, b_exp) = shared.get_expression(view, point, direction)
 
-		if a_exp and b_exp:
+		if shared.truthy(a_exp, b_exp):
 			(anext_exp, bnext_exp) = reversed(shared.get_next_expression(
 				view, shared.step(b_exp, -1 if direction == "backward" else -2, direction), True, shared.opposite_direction(direction)))
-			if anext_exp and bnext_exp:
+			if shared.truthy(anext_exp, bnext_exp):
 				end_bracket = shared.get_char(view, shared.step(b_exp, -1, direction), direction)
 
 				view.erase(edit, sublime.Region(shared.step(b_exp, -1, direction), b_exp))

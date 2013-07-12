@@ -11,7 +11,7 @@ def strict_delete_selection(view, edit, region):
 	point = region.begin()
 	while point < region.end():
 		(a, b) = shared.get_next_expression(view, point, True)
-		if a and b:
+		if shared.truthy(a, b):
 			if shared.is_inside_word(view.substr(a)):
 				if a > region.end():
 					break
@@ -31,8 +31,8 @@ def strict_delete_selection(view, edit, region):
 
 def remove_empty_expression(view, edit, point, fail_direction):
 	(lb, rb) = shared.get_expression(view, point)
-	
-	if lb and rb:
+
+	if shared.truthy(lb, rb):
 		expr_region = sublime.Region(lb, rb)
 		expression = view.substr(expr_region)
 		if shared.is_expression_empty(expression):
@@ -116,7 +116,7 @@ def paredit_kill_abstract(view, edit, expression):
 		point = region.a
 
 		(lb, rb) = shared.get_expression(view, point)
-		if lb and rb:
+		if shared.truthy(lb, rb):
 			if expression:
 				view.erase(edit, sublime.Region(lb + 1, rb - 1))
 				return lb + 1
@@ -145,7 +145,7 @@ def paredit_kill_word(view, edit, is_forward):
 		else:
 			(lw, rw) = shared.get_previous_word(view, point)
 
-		if lw and rw:
+		if shared.truthy(lw, rw):
 			return shared.erase_region(view, edit, sublime.Region(lw, rw))
 
 		return region

@@ -23,11 +23,11 @@ def paredit_move(view, edit, direction):
 			point -= 1
 
 		(word_a, word_b) = shared.get_word(view, point, direction)
-		if word_b:
+		if shared.truthy(word_b):
 			return word_b
 
 		(next_a, next_b) = shared.get_next_expression(view, point, False, direction)
-		if next_b:
+		if shared.truthy(next_b):
 			return next_b
 
 		expr_point = point
@@ -35,8 +35,7 @@ def paredit_move(view, edit, direction):
 			expr_point += 1
 
 		(a, b) = shared.get_expression(view, expr_point, direction)
-		if b:
-			return b
+		if shared.truthy(b): return b
 
 		if direction == "forward":
 			return shared.step(point, 1, direction)
