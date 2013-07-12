@@ -5,9 +5,16 @@ for [sublime text](http://www.sublimetext.com/).
 
 ## Installation
 
-To try the current implementation, clone the repository and place the resulting
-directory in `Installed Packages` inside your
-[data directory](http://docs.sublimetext.info/en/latest/basic_concepts.html#the-data-directory).
+### With package control (recommended)
+
+Use [Sublime Package Control](http://wbond.net/sublime_packages/package_control),
+the package is called `paredit`.
+
+### Manually
+
+1. Clone the repository or download the [zipfile](https://github.com/odyssomay/paredit/archive/master.zip).
+2. The resulting folder - either from cloning or unzipping - should be moved to
+`Installed Packages` inside your [data directory](http://docs.sublimetext.info/en/latest/basic_concepts.html#the-data-directory).
 
 ## Usage
 
