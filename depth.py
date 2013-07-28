@@ -89,6 +89,28 @@ def paredit_splice_sexp_killing_forward(view, edit):
 
 	shared.edit_selections(view, f)
 
+def paredit_raise_sexp(view, edit):
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		point = region.a
+
+		(lb, rb) = shared.get_expression(view, point)
+		if shared.truthy(lb, rb):
+			(lexp, rexp) = shared.get_next_expression(view, point)
+			
+			lexp = lexp or point
+			rexp = rexp or point
+
+			view.erase(edit, sublime.Region(rexp, rb))
+			view.erase(edit, sublime.Region(lb, lexp))
+			return lb
+		else:
+			return point
+
+	shared.edit_selections(view, f)
+
 ####
 #### Commands
 class Paredit_wrap_roundCommand(sublime_plugin.TextCommand):
@@ -118,3 +140,7 @@ class Paredit_splice_sexp_killing_backwardCommand(sublime_plugin.TextCommand):
 class Paredit_splice_sexp_killing_forwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_splice_sexp_killing_forward(self.view, edit)
+
+class Paredit_raise_sexpCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_raise_sexp(self.view, edit)
