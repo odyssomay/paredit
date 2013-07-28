@@ -187,6 +187,9 @@ def get_word(view, point, direction="forward"):
 			word_right = i
 			break
 
+	word_left = word_left or 0
+	word_right = word_right or view.size()
+
 	if direction == "backward":
 		return (word_right, word_left)
 	return (word_left, word_right)
