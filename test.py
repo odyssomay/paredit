@@ -254,7 +254,7 @@ def paredit_test_depth_changing(view, edit):
 		[
 			["[1 2 |3 4]", "|3 4"]
 		,	["(def a |[1 2 3 4])", "|[1 2 3 4]"]
-		,	["\"hell|o world!\"", "|o world!"]
+		,	["(def a \"hell|o world!\")", "(def a |o world!)"]
 		])
 
 def paredit_test_barfage_slurpage(view, edit):
