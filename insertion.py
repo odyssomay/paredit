@@ -62,6 +62,9 @@ def paredit_close(view, edit, left_bracket, right_bracket):
 
 		if shared.truthy(rb):
 			return paredit_close_remove_spaces(view, edit, rb)
+		elif shared.truthy(lb):
+			view.insert(edit, point, right_bracket)
+			return point + 1
 		else:
 			return region
 
