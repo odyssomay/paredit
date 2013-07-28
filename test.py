@@ -249,6 +249,13 @@ def paredit_test_depth_changing(view, edit):
 		,	["(def a {|:a 3 :b 4})", "(def a |:a 3 :b 4)"]
 		,	["(def a {:a 3 :b 4|})", "(def a :a 3 :b 4|)"]
 		])
+	run_tests(view, edit,
+		"paredit_splice_sexp_killing_backward"
+		[
+			["[1 2 |3 4]", "|3 4"]
+		,	["(def a |[1 2 3 4])", "|[1 2 3 4]"]
+		,	["\"hell|o world!\"", "|o world!"]
+		])
 
 def paredit_test_barfage_slurpage(view, edit):
 	run_tests(view, edit,
