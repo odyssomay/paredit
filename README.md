@@ -28,6 +28,10 @@ from the cheatsheet.
 * paredit-backslash
 * paredit-recentre-on-sexp
 * paredit-reindent-defun
+* paredit-backward-up
+* paredit-backward-down
+* paredit-forward-up
+* paredit-forward-down
 
 ## Testing
 
