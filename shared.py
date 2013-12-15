@@ -141,13 +141,13 @@ def get_expression(view, point, direction="forward"):
 
 	return (None, None)
 
-def get_next_expression(view, point, skip_endbrackets=False, direction="forward"):
+def get_next_expression(view, point, skip_endbrackets=False, direction="forward", skip_words=False):
 	if direction == "backward":
-		return tuple(reversed(get_previous_expression(view, point, skip_endbrackets)))
+		return tuple(reversed(get_previous_expression(view, point, skip_endbrackets, skip_words)))
 
 	for (i, c) in walk_right(view, point):
 		if not c.isspace():
-			if is_inside_word(c):
+			if (not skip_words) and is_inside_word(c):
 				return get_word(view, i)
 			t = char_type(c)
 			if t == "lbracket" or t == "string":
@@ -157,10 +157,10 @@ def get_next_expression(view, point, skip_endbrackets=False, direction="forward"
 
 	return (None, None)
 
-def get_previous_expression(view, point, skip_endbrackets=False):
+def get_previous_expression(view, point, skip_endbrackets=False, skip_words=False):
 	for (i, c) in walk_left(view, point):
 		if not c.isspace():
-			if is_inside_word(c):
+			if (not skip_words) and is_inside_word(c):
 				return get_word(view, i)
 			t = char_type(c)
 			if t == "rbracket" or t == "string":
