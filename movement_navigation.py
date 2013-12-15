@@ -50,6 +50,50 @@ def paredit_forward(view, edit):
 def paredit_backward(view, edit):
 	paredit_move(view, edit, "backward")
 
+def paredit_forward_up(view, edit):
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		(a, b) = shared.get_expression(view, region.a)
+		if b:
+			return b
+
+	shared.edit_selections(view, f)
+
+def paredit_forward_down(view, edit):
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		(a, b) = shared.get_next_expression(view, region.a, skip_words=True)
+		if a:
+			return a + 1
+
+	shared.edit_selections(view, f)
+
+def paredit_backward_up(view, edit):
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		(a, b) = shared.get_expression(view, region.a)
+		if a:
+			return a
+
+	shared.edit_selections(view, f)
+
+def paredit_backward_down(view, edit):
+	def f(region):
+		if not region.a == region.b:
+			return region
+
+		(a, b) = shared.get_previous_expression(view, region.a - 1, skip_words=True)
+		if b:
+			return b - 1
+
+	shared.edit_selections(view, f)
+
 class Paredit_forwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_forward(self.view, edit)
@@ -57,3 +101,19 @@ class Paredit_forwardCommand(sublime_plugin.TextCommand):
 class Paredit_backwardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		paredit_backward(self.view, edit)
+
+class Paredit_forward_upCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_forward_up(self.view, edit)
+
+class Paredit_forward_downCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_forward_down(self.view, edit)
+
+class Paredit_backward_upCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_backward_up(self.view, edit)
+
+class Paredit_backward_downCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		paredit_backward_down(self.view, edit)
