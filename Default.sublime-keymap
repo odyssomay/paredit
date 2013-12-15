@@ -94,6 +94,26 @@
 	"command": "paredit_backward",
 	"context": [{"key": "should_paredit"}]
  }
+,{
+	"keys": ["ctrl+alt+n"],
+	"command": "paredit_forward_up",
+	"context": [{"key": "should_paredit"}]
+ }
+,{
+	"keys": ["ctrl+alt+d"],
+	"command": "paredit_forward_down",
+	"context": [{"key": "should_paredit"}]
+ }
+,{
+	"keys": ["ctrl+alt+u"],
+	"command": "paredit_backward_up",
+	"context": [{"key": "should_paredit"}]
+ }
+,{
+	"keys": ["ctrl+alt+p"],
+	"command": "paredit_backward_down",
+	"context": [{"key": "should_paredit"}]
+ }
 
 ////
 //// Depth-changing commands
