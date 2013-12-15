@@ -84,20 +84,20 @@ The settings are:
 <table>
 	<tr><td>enabled</td>
 		<td>Completely enable or disable paredit.
-			Default: **true**</td></tr>
+			Default: <strong>true</strong></td></tr>
 	<tr><td>strict_mode</td><td></td></tr>
 	<tr><td>syntax</td>
 		<td>A list of syntax names which will activate paredit.
 
 			Each item in the list is a regex that will be used to find a match anywhere in the syntax name.
 
-			Find the syntax name of the current file by pressing ``ctrl+``` (to open the console), paste `view.settings().get("syntax")` into the text field at the bottom and press enter.
+			Find the syntax name of the current file by pressing <code>ctrl+`</code> (to open the console), paste <code>view.settings().get("syntax")</code> into the text field at the bottom and press enter.
 
-			Default: **["Clojure", "Lisp"]**</td></tr>
+			Default: <strong>["Clojure", "Lisp"]</strong></td></tr>
 	<tr><td>file_name</td>
 		<td>Works exactly like the *syntax* option but activates on file name.
 
-			Default: **[]**</td></tr>
+			Default: <strong>[]</strong></td></tr>
 </table>
 
 See the default settings (that you open through the menu) for an example on how the file should look.
