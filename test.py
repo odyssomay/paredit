@@ -224,21 +224,25 @@ def paredit_test_movement_navigation(view, edit):
 		"paredit_forward_up",
 		[
 			["(foo (bar baz|))", "(foo (bar baz)|)"]
+		,	["(foo (bar| baz))", "(foo (bar baz)|)"]
 		])
 	run_tests(view, edit,
 		"paredit_forward_down",
 		[
 			["(foo |(bar baz))", "(foo (|bar baz))"]
+		,	["(|foo (bar baz))", "(foo (|bar baz))"]
 		])
 	run_tests(view, edit,
 		"paredit_backward_up",
 		[
 			["(foo (|bar baz))", "(foo |(bar baz))"]
+		,	["(foo (bar baz|))", "(foo |(bar baz))"]
 		])
 	run_tests(view, edit,
 		"paredit_backward_down",
 		[
 			["(foo (bar baz)|)", "(foo (bar baz|))"]
+		,	["(foo (bar baz) baz|)", "(foo (bar baz|) baz)"]
 		])
 
 def paredit_test_depth_changing(view, edit):
