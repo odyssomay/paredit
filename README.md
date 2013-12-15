@@ -20,6 +20,41 @@ the package is called `paredit`.
 
 See [the cheatsheet](http://pub.gajendra.net/src/paredit-refcard.pdf).
 
+### Keyboard shortcuts
+
+A simpler to read list if you have already checked out [the cheatsheet](http://pub.gajendra.net/src/paredit-refcard.pdf) and know what each command does.
+
+```
+               [ " ]: Doublequote
+               [ ( ]: Open Round
+               [ ) ]: Close Round
+           [ ALT ; ]: Comment Dwim
+   [ ALT BACKSPACE ]: Backward Kill Word
+      [ ALT DELETE ]: Forward Kill Word
+           [ ALT S ]: Splice Sexp
+     [ ALT SHIFT ' ]: Meta Doublequote
+     [ ALT SHIFT 9 ]: Wrap Round
+     [ ALT SHIFT J ]: Join Sexp
+     [ ALT SHIFT S ]: Split Sexp
+     [ ALT SHIFT [ ]: Wrap Curly
+           [ ALT [ ]: Wrap Square
+       [ BACKSPACE ]: Backward Delete
+      [ CTRL ALT B ]: Backward
+      [ CTRL ALT F ]: Forward
+          [ CTRL J ]: Newline
+          [ CTRL K ]: Kill
+    [ CTRL SHIFT 0 ]: Forward Slurp Sexp
+    [ CTRL SHIFT 9 ]: Backward Slurp Sexp
+    [ CTRL SHIFT K ]: Kill Expression
+    [ CTRL SHIFT [ ]: Backward Barf Sexp
+    [ CTRL SHIFT ] ]: Forward Barf Sexp
+          [ DELETE ]: Forward Delete
+               [ [ ]: Open Square
+               [ ] ]: Close Square
+               [ { ]: Open Curly
+               [ } ]: Close Curly
+```
+
 ## Configuration
 
 Paredit configuration can be found in the menu `Preferences->Package Settings->Paredit`. It has the following menu items:
