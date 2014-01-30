@@ -106,7 +106,9 @@ def paredit_doublequote(view, edit):
 		e = region.end()
 
 		if s == e:
-			if shared.is_inside_string(view, s):
+			if view.substr(s) == "\"":
+				return s + 1
+			elif shared.is_inside_string(view, s):
 				view.insert(edit, s, "\\\"")
 				return s + 2
 			else:
